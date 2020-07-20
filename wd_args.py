@@ -29,7 +29,9 @@ def get_target_args(target_id):
             "id": [target_id]
         }
     }, {
-        "return": ["@Volume", "@Pitch", "@Lowpass", "@Highpass", "@@ListenerRelativeRouting", "@@3DSpatialization", "@@EnableAttenuation", "@@Attenuation", "@@UseMaxSoundPerInstance", "@@MaxSoundPerInstance", "@SwitchGroupOrStateGroup"]
+        "return": ["@Volume", "@Pitch", "@Lowpass", "@Highpass", "@@ListenerRelativeRouting", 
+                    "@@3DSpatialization", "@@EnableAttenuation", "@@Attenuation", "@@UseMaxSoundPerInstance", 
+                    "@@MaxSoundPerInstance", "@SwitchGroupOrStateGroup"]
     }
 
 
@@ -43,5 +45,5 @@ def get_switch_args(target_id):
             # {"where": ["type:isIn", "SwitchContainer"]}
         ]
     }, {
-        "return": ["@SwitchGroupOrStateGroup"]
+        "return": ["type", "@SwitchGroupOrStateGroup"]
     }
