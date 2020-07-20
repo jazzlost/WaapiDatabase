@@ -269,10 +269,8 @@
 				</SwitchContainer>
 				<BlendContainer Name="Ambient" ID="{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}" ShortID="458855951">
 					<PropertyList>
-						<Property Name="3DSpatialization" Type="int16" Value="2"/>
 						<Property Name="Color" Type="int16" Value="2"/>
 						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
-						<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 						<Property Name="Lowpass" Type="int16">
 							<ValueList>
 								<Value>40</Value>
@@ -303,16 +301,44 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<Sound Name="SFX_04" ID="{E694DF21-855D-4E69-8BA8-AD09302B71BB}" ShortID="283934974">
+						<SwitchContainer Name="Time" ID="{342C62AA-4A1F-48B0-B996-791D5C4F1C11}" ShortID="199653896">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1A5B864-44F3-48EC-8B80-060E38B32D29}"/>
 								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="Night" ID="{3AFCC527-DE70-431F-864B-C12134A43E21}" WorkUnitID="{2D0D6825-B56D-43C2-A39F-DE37B54B0628}"/>
+								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{59CBE7EC-1727-4388-93A5-0EFA032D96EB}"/>
 								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="Time" ID="{6AB0DF6B-BB83-4A14-BEC1-A1F8D17194D5}" WorkUnitID="{2D0D6825-B56D-43C2-A39F-DE37B54B0628}"/>
+								</Reference>
 							</ReferenceList>
-						</Sound>
+							<ChildrenList>
+								<Sound Name="SFX_04" ID="{E694DF21-855D-4E69-8BA8-AD09302B71BB}" ShortID="283934974">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1A5B864-44F3-48EC-8B80-060E38B32D29}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{59CBE7EC-1727-4388-93A5-0EFA032D96EB}"/>
+										</Reference>
+									</ReferenceList>
+								</Sound>
+							</ChildrenList>
+							<GroupingInfo>
+								<GroupingBehaviorList>
+									<GroupingBehavior>
+										<ItemRef Name="SFX_04" ID="{E694DF21-855D-4E69-8BA8-AD09302B71BB}"/>
+									</GroupingBehavior>
+								</GroupingBehaviorList>
+							</GroupingInfo>
+						</SwitchContainer>
 					</ChildrenList>
 				</BlendContainer>
 			</ChildrenList>

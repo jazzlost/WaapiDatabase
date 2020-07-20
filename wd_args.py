@@ -47,3 +47,12 @@ def get_switch_args(target_id):
     }, {
         "return": ["type", "@SwitchGroupOrStateGroup"]
     }
+
+def get_state_args(switch_id):
+    return {
+        "from": {
+            "id": [switch_id]
+        }
+    }, {
+        "return": ["type"]
+    }

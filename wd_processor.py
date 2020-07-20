@@ -37,3 +37,10 @@ def process_switch(switches, data):
     for switch in switches.get("return"):
         if(switch.get("@SwitchGroupOrStateGroup") is not None):
             data.setdefault("TargetSwitchGroup", []).append(switch.get("@SwitchGroupOrStateGroup"))
+
+
+def process_state(switch, states, data):
+    for state in states.get("return"):
+        if state.get("type") == "StateGroup":
+            data["TargetSwitchGroup"].remove(switch)
+            data.setdefault("TargetStateGroup", []).append(switch)

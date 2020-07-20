@@ -73,17 +73,31 @@ class formula_client(object):
         
         for data in self.datas:
             kwargs, option = get_target_args(data.get("TargetId"))
-            targets = self.client.call("ak.wwise.core.object.get", **kwargs, options = option)
+            targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_target(targets, data)
 
         ##############################################################################################
 
         for data in self.datas:
             kwargs, option = get_switch_args(data.get("TargetId"))
-            switches = self.client.call("ak.wwise.core.object.get", **kwargs, options = option)
+            switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             if switches is not None:
                 process_switch(switches, data)
 
+
+        ##############################################################################################
+        
+        for data in self.datas:
+            if "TargetSwitchGroup" in data:
+                for switch in data.get("TargetSwitchGroup"):
+                    kwargs, option = get_state_args(switch.get("id"))
+                    states = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                    if states is not None:
+                        process_state(switch, states, data)
+                if len(data["TargetSwitchGroup"]) == 0:
+                    del data["TargetSwitchGroup"]
+
+        print("pause")
         ##############################################################################################
 
     def handle_property(self):
