@@ -29,7 +29,7 @@ def get_target_args(target_id):
             "id": [target_id]
         }
     }, {
-        "return": ["@Volume", "@Pitch", "@Lowpass", "@Highpass", "@@Attenuation", "@@UseMaxSoundPerInstance", "@@MaxSoundPerInstance", "@SwitchGroupOrStateGroup"]
+        "return": ["@Volume", "@Pitch", "@Lowpass", "@Highpass", "@@ListenerRelativeRouting", "@@3DSpatialization", "@@EnableAttenuation", "@@Attenuation", "@@UseMaxSoundPerInstance", "@@MaxSoundPerInstance", "@SwitchGroupOrStateGroup"]
     }
 
 

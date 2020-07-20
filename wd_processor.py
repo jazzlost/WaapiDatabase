@@ -24,8 +24,12 @@ def process_target(targets, data):
         data.setdefault("TargetHPF", target.get("@Highpass"))
         data.setdefault("TargetUseMaxSoundInstance", target.get("@@UseMaxSoundPerInstance"))
         data.setdefault("TargetMaxSound", target.get("@@UseMaxSoundPerInstance"))
-        data.setdefault("TargetAttenId", target.get("@@Attenuation").get("id"))
-        data.setdefault("TargetAttenName", target.get("@@Attenuation").get("name"))
+        if(target.get("@@ListenerRelativeRouting") is not False):
+            data.setdefault("TargetUseRelativeRouting", target.get("@@ListenerRelativeRouting"))
+            data.setdefault("Target3DSpatialization", target.get("@@3DSpatialization"))
+        if(target.get("@@EnableAttenuation") is not False):
+            data.setdefault("TargetAttenId", target.get("@@Attenuation").get("id"))
+            data.setdefault("TargetAttenName", target.get("@@Attenuation").get("name"))
         if(target.get("@SwitchGroupOrStateGroup") is not None):
             data.setdefault("TargetSwitchGroup", []).append(target.get("@SwitchGroupOrStateGroup"))
 
