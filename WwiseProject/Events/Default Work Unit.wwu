@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{ACF47AE4-4C0E-45D0-ADC2-7557019B28FE}" SchemaVersion="94">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{ACF47AE4-4C0E-45D0-ADC2-7557019B28FE}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Character" ID="{6953B68C-73AC-4A4B-938B-A54B371E0BB9}">
+					<ChildrenList>
+						<Action Name="" ID="{DD109AD7-A9B8-4A7F-B6A1-5CC8D6E0D276}" ShortID="1022135031">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Character" ID="{6D0986ED-0B90-43BB-AC7F-0025C1618AA3}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Weapon" ID="{0161906D-E958-4245-BBF5-7C72BFA2ACBB}">
+					<ChildrenList>
+						<Action Name="" ID="{E2F27F99-1530-45C8-B456-EDB6B18E7C33}" ShortID="872468681">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Weapon" ID="{46EF1EF0-6C5E-4E43-A9BF-E491E3881EBB}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Vehicle" ID="{EB9FAB9C-F9BD-467B-B22F-12B0ACD58DB1}">
+					<ChildrenList>
+						<Action Name="" ID="{0405D000-8875-4AFC-BBAA-CB6DFA4BC6B4}" ShortID="175672089">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Vehicle" ID="{EE59A588-55BB-4409-BC88-D04EEAB0E276}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Ambient" ID="{BE62A221-4503-4000-BF91-55F767088450}">
+					<ChildrenList>
+						<Action Name="" ID="{1F7CFB54-E9A0-408A-9524-D142401504A6}" ShortID="847946705">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Ambient" ID="{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -102,3 +102,13 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Wwise
+.cache
+.akd
+.prof
+.wsettings
+.validationcache
+.wem
+/WwiseProject/*.validationcache
+/WwiseProject/WaapiFormula.lyc.wsettings
