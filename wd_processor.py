@@ -28,8 +28,7 @@ def process_target(targets, data):
             data.setdefault("TargetUseRelativeRouting", target.get("@@ListenerRelativeRouting"))
             data.setdefault("Target3DSpatialization", target.get("@@3DSpatialization"))
         if(target.get("@@EnableAttenuation") is not False):
-            data.setdefault("TargetAttenId", target.get("@@Attenuation").get("id"))
-            data.setdefault("TargetAttenName", target.get("@@Attenuation").get("name"))
+            data.setdefault("TargetAttenuation", target.get("@@Attenuation"))
         if(target.get("@SwitchGroupOrStateGroup") is not None):
             data.setdefault("TargetSwitchGroup", []).append(target.get("@SwitchGroupOrStateGroup"))
 
@@ -53,3 +52,22 @@ def process_switch(switchgroup, switches, switch_datas):
         data["SwitchState"].append(switch)
 
     switch_datas.append(data)
+
+
+def process_state(stategroup, states, state_datas):
+    data = {"StateGroup": stategroup, "State": []}
+    for state in states.get("return"):
+        data["State"].append(state)
+
+    state_datas.append(data)
+
+
+def process_atten(attens, atten_datas):
+    data = {}
+    for atten in attens.get("return"):
+        data.setdefault("id", atten.get("id"))
+        data.setdefault("name", atten.get("name"))
+        data.setdefault("MaxDistance", atten.get("@@RadiusMax"))
+        data.setdefault("UseCone", atten.get("@@ConeUse"))
+
+    atten_datas.append(data)

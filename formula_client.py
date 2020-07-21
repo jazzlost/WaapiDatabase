@@ -21,6 +21,8 @@ class formula_client(object):
             self.fplist.append(name)
         self.datas = []
         self.switch_datas = []
+        self.state_datas = []
+        self.atten_datas = []
 
     def __del__(self):
         self.disconnect()
@@ -96,14 +98,31 @@ class formula_client(object):
                         process_stategroup(switchgroup, stategroups, data)
                 if len(data["TargetSwitchGroup"]) == 0:
                     del data["TargetSwitchGroup"]
-        
+
+        ##############################################################################################
+
         for data in self.datas:
             if "TargetSwitchGroup" in data:
                 for switchgroup in data.get("TargetSwitchGroup"):
-                    kwargs, option = get_switch_args(switchgroup.get("id"))
+                    kwargs, option = get_children_args(switchgroup.get("id"))
                     switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                     if switches is not None:
                         process_switch(switchgroup, switches, self.switch_datas)
+            elif "TargetStateGroup" in data:
+                for stategroup in data.get("TargetStateGroup"):
+                    kwargs, option = get_children_args(stategroup.get("id"))
+                    states = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                    if states is not None:
+                        process_state(stategroup, states, self.state_datas)
+
+        ##############################################################################################
+        for data in self.datas:
+            if "TargetAttenuation" in data:
+                atten = data.get("TargetAttenuation")
+                kwargs, option = get_atten_args(atten.get("id"))
+                attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                if attens is not None:
+                    process_atten(attens, self.atten_datas)
 
 
         print("pause")

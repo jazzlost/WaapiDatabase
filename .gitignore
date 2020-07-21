@@ -112,3 +112,4 @@ venv.bak/
 .wem
 /WwiseProject/*.validationcache
 /WwiseProject/WaapiFormula.lyc.wsettings
+/WwiseProject/*.wsettings

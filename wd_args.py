@@ -59,14 +59,24 @@ def get_stategroup_args(switchgroup_id):
     }
 
 
-def get_switch_args(switch_id):
+def get_children_args(children_id):
     return {
         "from": {
-            "id": [switch_id]
+            "id": [children_id]
         },
         "transform": [
             {"select": ["children"]}
         ]
     }, {
         "return": ["id", "name"]
+    }
+
+
+def get_atten_args(atten_id):
+    return {
+        "from": {
+            "id": [atten_id]
+        }
+    }, {
+        "return": ["id", "name", "@@RadiusMax", "@@ConeUse"]
     }
