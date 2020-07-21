@@ -19,7 +19,7 @@ class formula_client(object):
         self.fplist = []
         for name in fpdict.keys():
             self.fplist.append(name)
-        self.datas = []
+        self.event_datas = []
         self.switch_datas = []
         self.state_datas = []
         self.atten_datas = []
@@ -64,24 +64,24 @@ class formula_client(object):
     def handle_event(self):
 
         events = self.client.call("ak.wwise.core.object.get", get_event_args())
-        process_event(events, self.datas)
+        process_event(events, self.event_datas)
         ##############################################################################################
 
-        for data in self.datas:
+        for data in self.event_datas:
             kwargs, option = get_action_args(data.get("EventId"))
             actions = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_action(actions, data)
         
         ##############################################################################################
         
-        for data in self.datas:
+        for data in self.event_datas:
             kwargs, option = get_target_args(data.get("TargetId"))
             targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_target(targets, data)
 
         ##############################################################################################
 
-        for data in self.datas:
+        for data in self.event_datas:
             kwargs, option = get_switchgroup_args(data.get("TargetId"))
             switchgroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             if switchgroups is not None:
@@ -89,7 +89,7 @@ class formula_client(object):
 
         ##############################################################################################
         
-        for data in self.datas:
+        for data in self.event_datas:
             if "TargetSwitchGroup" in data:
                 for switchgroup in data.get("TargetSwitchGroup"):
                     kwargs, option = get_stategroup_args(switchgroup.get("id"))
@@ -101,7 +101,7 @@ class formula_client(object):
 
         ##############################################################################################
 
-        for data in self.datas:
+        for data in self.event_datas:
             if "TargetSwitchGroup" in data:
                 for switchgroup in data.get("TargetSwitchGroup"):
                     kwargs, option = get_children_args(switchgroup.get("id"))
@@ -116,7 +116,7 @@ class formula_client(object):
                         process_state(stategroup, states, self.state_datas)
 
         ##############################################################################################
-        for data in self.datas:
+        for data in self.event_datas:
             if "TargetAttenuation" in data:
                 atten = data.get("TargetAttenuation")
                 kwargs, option = get_atten_args(atten.get("id"))
