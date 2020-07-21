@@ -35,7 +35,7 @@ def get_target_args(target_id):
     }
 
 
-def get_switch_args(target_id):
+def get_switchgroup_args(target_id):
     return {
         "from": {
             "id": [target_id]
@@ -48,11 +48,25 @@ def get_switch_args(target_id):
         "return": ["type", "@SwitchGroupOrStateGroup"]
     }
 
-def get_state_args(switch_id):
+
+def get_stategroup_args(switchgroup_id):
     return {
         "from": {
-            "id": [switch_id]
+            "id": [switchgroup_id]
         }
     }, {
         "return": ["type"]
+    }
+
+
+def get_switch_args(switch_id):
+    return {
+        "from": {
+            "id": [switch_id]
+        },
+        "transform": [
+            {"select": ["children"]}
+        ]
+    }, {
+        "return": ["id", "name"]
     }

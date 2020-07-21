@@ -33,14 +33,23 @@ def process_target(targets, data):
         if(target.get("@SwitchGroupOrStateGroup") is not None):
             data.setdefault("TargetSwitchGroup", []).append(target.get("@SwitchGroupOrStateGroup"))
 
-def process_switch(switches, data):
+
+def process_switchgroup(switches, data):
     for switch in switches.get("return"):
         if(switch.get("@SwitchGroupOrStateGroup") is not None):
             data.setdefault("TargetSwitchGroup", []).append(switch.get("@SwitchGroupOrStateGroup"))
 
 
-def process_state(switch, states, data):
-    for state in states.get("return"):
+def process_stategroup(switchgroup, statesgroup, data):
+    for state in statesgroup.get("return"):
         if state.get("type") == "StateGroup":
-            data["TargetSwitchGroup"].remove(switch)
-            data.setdefault("TargetStateGroup", []).append(switch)
+            data["TargetSwitchGroup"].remove(switchgroup)
+            data.setdefault("TargetStateGroup", []).append(switchgroup)
+
+
+def process_switch(switchgroup, switches, switch_datas):
+    data = {"SwitchGroup": switchgroup, "SwitchState": []}
+    for switch in switches.get("return"):
+        data["SwitchState"].append(switch)
+
+    switch_datas.append(data)

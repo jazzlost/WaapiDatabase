@@ -20,6 +20,7 @@ class formula_client(object):
         for name in fpdict.keys():
             self.fplist.append(name)
         self.datas = []
+        self.switch_datas = []
 
     def __del__(self):
         self.disconnect()
@@ -79,23 +80,31 @@ class formula_client(object):
         ##############################################################################################
 
         for data in self.datas:
-            kwargs, option = get_switch_args(data.get("TargetId"))
-            switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-            if switches is not None:
-                process_switch(switches, data)
-
+            kwargs, option = get_switchgroup_args(data.get("TargetId"))
+            switchgroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+            if switchgroups is not None:
+                process_switchgroup(switchgroups, data)
 
         ##############################################################################################
         
         for data in self.datas:
             if "TargetSwitchGroup" in data:
-                for switch in data.get("TargetSwitchGroup"):
-                    kwargs, option = get_state_args(switch.get("id"))
-                    states = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-                    if states is not None:
-                        process_state(switch, states, data)
+                for switchgroup in data.get("TargetSwitchGroup"):
+                    kwargs, option = get_stategroup_args(switchgroup.get("id"))
+                    stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                    if stategroups is not None:
+                        process_stategroup(switchgroup, stategroups, data)
                 if len(data["TargetSwitchGroup"]) == 0:
                     del data["TargetSwitchGroup"]
+        
+        for data in self.datas:
+            if "TargetSwitchGroup" in data:
+                for switchgroup in data.get("TargetSwitchGroup"):
+                    kwargs, option = get_switch_args(switchgroup.get("id"))
+                    switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                    if switches is not None:
+                        process_switch(switchgroup, switches, self.switch_datas)
+
 
         print("pause")
         ##############################################################################################
