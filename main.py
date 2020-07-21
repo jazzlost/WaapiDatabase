@@ -1,6 +1,5 @@
 import time
 from formula_client import formula_client as fc
-from formula_config import *
 
 def check_input():
     print("\n")

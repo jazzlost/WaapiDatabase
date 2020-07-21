@@ -1,8 +1,6 @@
 import time
 from waapi import EventHandler, connect
 from formula_data import formula_data as fdata
-from formula_config import formula_properties_dict as fpdict
-from formula_config import formula_expression as my_expression
 
 from wd_args import *
 from wd_processor import *
@@ -14,11 +12,7 @@ class formula_client(object):
         self.url = url
         self.client = connect(url)
         self.data = fdata()
-        self.res_obj = False
-        self.exp = lambda x: x
-        self.fplist = []
-        for name in fpdict.keys():
-            self.fplist.append(name)
+
         self.event_datas = []
         self.switch_datas = []
         self.state_datas = []
@@ -75,14 +69,14 @@ class formula_client(object):
         ##############################################################################################
         
         for data in self.event_datas:
-            kwargs, option = get_target_args(data.get("TargetId"))
+            kwargs, option = get_target_args(data.get("Target").get("id"))
             targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_target(targets, data)
 
         ##############################################################################################
 
         for data in self.event_datas:
-            kwargs, option = get_switchgroup_args(data.get("TargetId"))
+            kwargs, option = get_switchgroup_args(data.get("Target").get("id"))
             switchgroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             if switchgroups is not None:
                 process_switchgroup(switchgroups, data)

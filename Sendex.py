@@ -2,13 +2,10 @@ import sqlite3
 import time
 import datetime
 import random
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from matplotlib import style
-style.use('fivethirtyeight')
 
-conn = sqlite3.connect("waapi.db")
-c = conn.cursor()
+def create_database():
+    conn = sqlite3.connect("waapi.db")
+    c = conn.cursor()
 
 
 def create_table():
