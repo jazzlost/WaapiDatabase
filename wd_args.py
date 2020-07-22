@@ -1,4 +1,4 @@
-
+from wd_config import *
 
 def get_event_args():
     return {
@@ -11,6 +11,10 @@ def get_event_args():
 
 
 def get_action_args(event_id):
+    ret_list = []
+    for value in action_config.values():
+        ret_list.append(value)
+
     return {
         "from": {
             "id": [event_id]
@@ -19,19 +23,27 @@ def get_action_args(event_id):
             {"select": ["children"]}
         ]
     }, {
-        "return": ["id", "@ActionType", "@Target"]
+        "return": ret_list
     }
 
 
 def get_target_args(target_id):
+    ret_list = []
+    for value in target_config.values():
+        ret_list.append(value)
+
+    for value in target_condition_config.keys():
+        ret_list.append(value)
+
+    for value in target_validation_config.values():
+        ret_list.append(value)
+
     return {
         "from": {
             "id": [target_id]
         }
     }, {
-        "return": ["@Volume", "@Pitch", "@Lowpass", "@Highpass", "@@ListenerRelativeRouting", 
-                    "@@3DSpatialization", "@@EnableAttenuation", "@@Attenuation", "@@UseMaxSoundPerInstance", 
-                    "@@MaxSoundPerInstance", "@SwitchGroupOrStateGroup"]
+        "return": ret_list
     }
 
 
@@ -42,7 +54,6 @@ def get_switchgroup_args(target_id):
         },
         "transform": [
             {"select": ["descendants"]}
-            # {"where": ["type:isIn", "SwitchContainer"]}
         ]
     }, {
         "return": ["type", "@SwitchGroupOrStateGroup"]
