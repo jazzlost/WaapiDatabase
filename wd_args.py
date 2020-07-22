@@ -32,8 +32,11 @@ def get_target_args(target_id):
     for value in target_config.values():
         ret_list.append(value)
 
-    for value in target_condition_config.keys():
-        ret_list.append(value)
+    for key, value in target_condition_config.items():
+        ret_list.append(key)
+        for obj in value:
+            for list_key, list_value in obj.items():
+                ret_list.append(list_value)
 
     for value in target_validation_config.values():
         ret_list.append(value)
