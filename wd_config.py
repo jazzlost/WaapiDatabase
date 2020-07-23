@@ -1,5 +1,5 @@
 
-################################Config############################################
+################################Waapi Config############################################
 
 event_config = {
    "EventId": "id",
@@ -13,8 +13,8 @@ action_config = {
 }
 
 target_config = {
-    "TargetsVolume": "@Volume",
-    "TargetsPitch": "@Pitch",
+    "TargetVolume": "@Volume",
+    "TargetPitch": "@Pitch",
     "TargetLPF": "@Lowpass",
     "TargetHPF": "@Highpass",
     "TargetUseMaxSoundInstance": "@@UseMaxSoundPerInstance",
@@ -49,3 +49,44 @@ atten_config = {
     "MaxDistance": "@@RadiusMax",
     "UseCone": "@@ConeUse"
 }
+
+################################SQLite Config############################################
+
+sql_event_table = {
+    "EventId": "TEXT",
+    "EventName": "TEXT",
+    "ActionId": "TEXT",
+    "ActionType": "TEXT",
+    "TargetId": "TEXT"
+}
+
+spl_target_table = {
+    "TargetId": "TEXT",
+    "TargetsVolume": "REAL",
+    "TargetPitch": "INTEGER",
+    "TargetLPF": "INTEGER",
+    "TargetHPF": "INTEGER",
+    "TargetUseMaxSoundInstance": "INTEGER",
+    "TargetMaxSound": "INTEGER"
+}
+
+sql_switch_table = {
+
+}
+
+sql_state_table = {
+
+}
+
+sql_atten_table = {
+
+}
+
+sql_tables = [
+    sql_event_table,
+    spl_target_table,
+    sql_switch_table,
+    sql_state_table,
+    sql_atten_table
+]
+
