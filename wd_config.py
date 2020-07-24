@@ -67,19 +67,28 @@ spl_target_table = {
     "TargetLPF": "INTEGER",
     "TargetHPF": "INTEGER",
     "TargetUseMaxSoundInstance": "INTEGER",
-    "TargetMaxSound": "INTEGER"
+    "TargetMaxSound": "INTEGER",
+    "TargetListenerRelativeRoute": "INTEGER",
+    "Target3DSpatialization": "TEXT",
+    "TargetAttenId": "TEXT",
+    "TargetSwitchOrStateGroup": "TEXT"
 }
 
 sql_switch_table = {
-
+    "SwitchGroupId": "TEXT",
+    "Switch": "TEXT"
 }
 
 sql_state_table = {
-
+    "StateGroupId": "TEXT",
+    "State": "TEXT"
 }
 
 sql_atten_table = {
-
+    "AttenId": "TEXT",
+    "AttenName": "TEXT",
+    "MaxDistance": "INTEGER",
+    "UseCone": "INTEGER"
 }
 
 sql_tables = [
