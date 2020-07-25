@@ -12,6 +12,7 @@ class client(object):
         self.client = connect(url)
 
         self.event_datas = []
+        self.target_datas = []
         self.switch_datas = []
         self.state_datas = []
         self.atten_datas = []
@@ -69,19 +70,19 @@ class client(object):
         for data in self.event_datas:
             kwargs, option = get_target_args(data.get("Target").get("id"))
             targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-            process_target(targets, data)
+            process_target(targets, self.target_datas)
 
         ##############################################################################################
 
-        for data in self.event_datas:
-            kwargs, option = get_switchgroup_args(data.get("Target").get("id"))
+        for data in self.target_datas:
+            kwargs, option = get_switchgroup_args(data.get("TargetId"))
             switchgroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             if switchgroups is not None:
                 process_switchgroup(switchgroups, data)
 
         ##############################################################################################
         
-        for data in self.event_datas:
+        for data in self.target_datas:
             if "TargetSwitchGroup" in data:
                 for switchgroup in data.get("TargetSwitchGroup"):
                     kwargs, option = get_stategroup_args(switchgroup.get("id"))
@@ -93,7 +94,7 @@ class client(object):
 
         ##############################################################################################
 
-        for data in self.event_datas:
+        for data in self.target_datas:
             if "TargetSwitchGroup" in data:
                 for switchgroup in data.get("TargetSwitchGroup"):
                     kwargs, option = get_children_args(switchgroup.get("id"))
@@ -108,7 +109,7 @@ class client(object):
                         process_state(stategroup, states, self.state_datas)
 
         ##############################################################################################
-        for data in self.event_datas:
+        for data in self.target_datas:
             if "TargetAttenuation" in data:
                 atten = data.get("TargetAttenuation")
                 kwargs, option = get_atten_args(atten.get("id"))

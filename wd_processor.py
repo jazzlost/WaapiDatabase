@@ -15,8 +15,9 @@ def process_action(actions, data):
             data.setdefault(key, action.get(value))
 
 
-def process_target(targets, data):
+def process_target(targets, datas):
     for target in targets.get("return"):
+        data = {}
         for key, value in target_config.items():
             data.setdefault(key, target.get(value))
         
@@ -27,8 +28,10 @@ def process_target(targets, data):
                         data.setdefault(key, target.get(value))
         
         for validation_key, validation_value in target_validation_config.items():
-            if target.get(validation_key) is not None:
+            if target.get(validation_value) is not None:
                 data.setdefault(validation_key, []).append(target.get(validation_value))
+
+        datas.append(data)
 
 
 def process_switchgroup(switches, data):
@@ -69,3 +72,7 @@ def process_atten(attens, atten_datas):
             data.setdefault(key, atten.get(value))
 
         atten_datas.append(data)
+
+# convert waapi data to sqlite data
+def process_convert(waapi_data):
+    pass

@@ -12,13 +12,15 @@ def main():
 
     client.handle_event()
 
-    c = create_database("waapi")
+    c, conn = create_database("waapi")
     for key, value in sql_tables.items():
         create_table(key, value, c)
 
+    values = ["{123456-789-10111213-1415}", "Play_test", "{456456-56156-4565}", "Play", "{156156-4555645-1454154}"]
+
+    insert_data("Event", values, c, conn)
     
     client.disconnect()
-
 
 if __name__ == "__main__":
     main()

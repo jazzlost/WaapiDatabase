@@ -2,28 +2,58 @@ import sqlite3
 import time
 import datetime
 import random
+from wd_config import sql_tables
+
+from wd_sqlite_utils import *
 
 def create_database(name):
     fullname = name + ".db"
     conn = sqlite3.connect(fullname)
     c = conn.cursor()
-    return c
+    return c, conn
+
+
+def close_operation(cursor, conn):
+    cursor.close()
+    conn.close()
 
 
 def create_table(name, table, cursor):
     if len(table) > 0:
-        sql=""
+        sql = ""
         column = ""
         for key, value in table.items():
             phrase = str(key) + " " + str(value) + ","
             column += phrase
-        index = column.find(",", -1)
-        list_column = list(column)
-        list_column.pop(index)
-        column = "".join(list_column)
-        sql = "CREATE TABLE IF NOT EXISTS" + " " + str(name) + "(" + column + ")" + ";"
+        column = remove_last_comma(column)
+        sql = "CREATE TABLE IF NOT EXISTS " + str(name) + "(" + column + ");"
         cursor.execute(sql)
 
+
+# Make sure values num is equal to table's column num
+def insert_data(table, values, cursor, conn):
+    if len(table) > 0 and len(values) > 0:
+        sql = ""
+        sql_column = ""
+        sql_value = ""
+        
+        for key in sql_tables.get(str(table)).keys():
+            phrase = str(key) + ","
+            sql_column += phrase
+        sql_column = remove_last_comma(sql_column)
+
+        for value in values:
+            phrase = "'" + str(value) + "'" + ","
+            sql_value += phrase
+        sql_value = remove_last_comma(sql_value)
+
+        sql = "INSERT INTO " + str(table) + "(" + sql_column + ")" + " VALUES " + "(" + sql_value + ");"
+        cursor.execute(sql)
+        conn.commit()
+
+
+def query_data(table, columns):
+    pass
 
 def data_entry():
     c.execute("INSERT INTO waapiTable VALUES(123456, '2020-07-10','python', 4)")

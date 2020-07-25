@@ -13,6 +13,8 @@ action_config = {
 }
 
 target_config = {
+    "TargetId": "id",
+    "TargetName": "name",
     "TargetVolume": "@Volume",
     "TargetPitch": "@Pitch",
     "TargetLPF": "@Lowpass",
@@ -78,13 +80,15 @@ sql_target_table = {
 sql_switch_table = {
     "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
     "Name": "VARCHAR",
-    "Switch": "VARCHAR"
+    "SwitchId": "VARCHAR",
+    "SwitchName": "VARCHAR"
 }
 
 sql_state_table = {
     "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
     "Name": "VARCHAR",
-    "State": "VARCHAR"
+    "StateId": "VARCHAR",
+    "StateName": "VARCHAR"
 }
 
 sql_atten_table = {
