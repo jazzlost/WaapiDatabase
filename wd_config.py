@@ -53,49 +53,51 @@ atten_config = {
 ################################SQLite Config############################################
 
 sql_event_table = {
-    "EventId": "TEXT",
-    "EventName": "TEXT",
-    "ActionId": "TEXT",
-    "ActionType": "TEXT",
-    "TargetId": "TEXT"
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "ActionId": "VARCHAR",
+    "ActionType": "VARCHAR",
+    "TargetId": "VARCHAR"
 }
 
-spl_target_table = {
-    "TargetId": "TEXT",
-    "TargetsVolume": "REAL",
-    "TargetPitch": "INTEGER",
-    "TargetLPF": "INTEGER",
-    "TargetHPF": "INTEGER",
-    "TargetUseMaxSoundInstance": "INTEGER",
-    "TargetMaxSound": "INTEGER",
-    "TargetListenerRelativeRoute": "INTEGER",
-    "Target3DSpatialization": "TEXT",
-    "TargetAttenId": "TEXT",
-    "TargetSwitchOrStateGroup": "TEXT"
+sql_target_table = {
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "Volume": "REAL DEFAULT 0.0",
+    "Pitch": "INT DEFAULT 0",
+    "LPF": "INT DEFAULT 0",
+    "HPF": "INT DEFAULT 0",
+    "UseMaxSoundInstance": "INT DEFAULT 0",
+    "MaxSound": "INT DEFAULT 50",
+    "UseListenerRelativeRoute": "INT DEFAULT 0",
+    "Spatialization3D": "VARCHAR",
+    "AttenId": "VARCHAR",
+    "SwitchOrStateGroup": "VARCHAR"
 }
 
 sql_switch_table = {
-    "SwitchGroupId": "TEXT",
-    "Switch": "TEXT"
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "Switch": "VARCHAR"
 }
 
 sql_state_table = {
-    "StateGroupId": "TEXT",
-    "State": "TEXT"
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "State": "VARCHAR"
 }
 
 sql_atten_table = {
-    "AttenId": "TEXT",
-    "AttenName": "TEXT",
-    "MaxDistance": "INTEGER",
-    "UseCone": "INTEGER"
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "MaxDistance": "INT",
+    "UseCone": "INT"
 }
 
-sql_tables = [
-    sql_event_table,
-    spl_target_table,
-    sql_switch_table,
-    sql_state_table,
-    sql_atten_table
-]
-
+sql_tables = {
+    "Event": sql_event_table,
+    "Target": sql_target_table,
+    "Switch": sql_switch_table,
+    "State": sql_state_table,
+    "Attenuation": sql_atten_table
+}

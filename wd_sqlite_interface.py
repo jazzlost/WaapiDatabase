@@ -3,13 +3,26 @@ import time
 import datetime
 import random
 
-def create_database():
-    conn = sqlite3.connect("waapi.db")
+def create_database(name):
+    fullname = name + ".db"
+    conn = sqlite3.connect(fullname)
     c = conn.cursor()
+    return c
 
 
-def create_table():
-    c.execute('CREATE TABLE IF NOT EXISTS waapiTable(unix REAL, datestamp TEXT, keyword TEXT, value REAL)')
+def create_table(name, table, cursor):
+    if len(table) > 0:
+        sql=""
+        column = ""
+        for key, value in table.items():
+            phrase = str(key) + " " + str(value) + ","
+            column += phrase
+        index = column.find(",", -1)
+        list_column = list(column)
+        list_column.pop(index)
+        column = "".join(list_column)
+        sql = "CREATE TABLE IF NOT EXISTS" + " " + str(name) + "(" + column + ")" + ";"
+        cursor.execute(sql)
 
 
 def data_entry():
@@ -67,7 +80,7 @@ def del_and_update():
 # read_from_db()
 # graph_data()
 
-del_and_update()
+# del_and_update()
 
-c.close()
-conn.close()
+# c.close()
+# conn.close()
