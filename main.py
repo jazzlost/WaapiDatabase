@@ -1,5 +1,5 @@
 import time
-from formula_client import formula_client as fc
+from wd_client import client as wdc
 
 from wd_sqlite_interface import *
 from wd_config import *
@@ -7,19 +7,17 @@ from wd_config import *
 
 def main():
     
-    formula = fc()
-    formula.connect()
-    formula.handle_project()
+    client = wdc()
+    client.connect()
 
-    # formula.handle_event()
-
+    client.handle_event()
 
     c = create_database("waapi")
     for key, value in sql_tables.items():
         create_table(key, value, c)
 
     
-    formula.disconnect()
+    client.disconnect()
 
 
 if __name__ == "__main__":
