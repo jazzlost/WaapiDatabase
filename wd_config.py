@@ -2,8 +2,8 @@
 ################################Waapi Config############################################
 
 event_config = {
-   "EventId": "id",
-   "EventName": "name"
+   "Id": "id",
+   "Name": "name"
 }
 
 action_config = {
@@ -13,20 +13,20 @@ action_config = {
 }
 
 target_config = {
-    "TargetId": "id",
-    "TargetName": "name",
-    "TargetVolume": "@Volume",
-    "TargetPitch": "@Pitch",
-    "TargetLPF": "@Lowpass",
-    "TargetHPF": "@Highpass",
-    "TargetUseMaxSoundInstance": "@@UseMaxSoundPerInstance",
-    "TargetMaxSound": "@@UseMaxSoundPerInstance"
+    "Id": "id",
+    "Name": "name",
+    "Volume": "@Volume",
+    "Pitch": "@Pitch",
+    "LPF": "@Lowpass",
+    "HPF": "@Highpass",
+    "UseMaxSoundInstance": "@@UseMaxSoundPerInstance",
+    "MaxSound": "@@UseMaxSoundPerInstance"
 }
 
 target_condition_config = {
     "@@ListenerRelativeRouting": [
-        {"TargetUseRelativeRouting": "@@ListenerRelativeRouting"},
-        {"Target3DSpatialization": "@@3DSpatialization"}
+        {"UseListenerRelativeRoute": "@@ListenerRelativeRouting"},
+        {"Spatialization3D": "@@3DSpatialization"}
     ],
     "@@EnableAttenuation": [
         {"TargetAttenuation": "@@Attenuation"}
@@ -34,7 +34,7 @@ target_condition_config = {
 }
 
 target_validation_config = {
-    "TargetSwitchGroup": "@SwitchGroupOrStateGroup"
+    "SwitchOrStateGroup": "@SwitchGroupOrStateGroup"
 }
 
 switchgroup_config = {
@@ -46,8 +46,8 @@ stategroup_config = {
 }
 
 atten_config = {
-    "id": "id",
-    "name": "name",
+    "Id": "id",
+    "Name": "name",
     "MaxDistance": "@@RadiusMax",
     "UseCone": "@@ConeUse"
 }
@@ -58,7 +58,7 @@ sql_event_table = {
     "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
     "Name": "VARCHAR",
     "ActionId": "VARCHAR",
-    "ActionType": "VARCHAR",
+    "ActionType": "INT",
     "TargetId": "VARCHAR"
 }
 
@@ -74,7 +74,7 @@ sql_target_table = {
     "UseListenerRelativeRoute": "INT DEFAULT 0",
     "Spatialization3D": "VARCHAR",
     "AttenId": "VARCHAR",
-    "SwitchOrStateGroup": "VARCHAR"
+    "SwitchOrStateGroupId": "VARCHAR"
 }
 
 sql_switch_table = {

@@ -72,7 +72,3 @@ def process_atten(attens, atten_datas):
             data.setdefault(key, atten.get(value))
 
         atten_datas.append(data)
-
-# convert waapi data to sqlite data
-def process_convert(waapi_data):
-    pass

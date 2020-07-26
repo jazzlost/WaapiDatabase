@@ -10,12 +10,13 @@ class client(object):
     def __init__(self, url=None):
         self.url = url
         self.client = connect(url)
-
         self.event_datas = []
         self.target_datas = []
         self.switch_datas = []
         self.state_datas = []
         self.atten_datas = []
+
+        self.datas = [self.event_datas, self.target_datas, self.switch_datas, self.state_datas, self.atten_datas]
 
     def __del__(self):
         self.disconnect()
@@ -61,7 +62,7 @@ class client(object):
         ##############################################################################################
 
         for data in self.event_datas:
-            kwargs, option = get_action_args(data.get("EventId"))
+            kwargs, option = get_action_args(data.get("Id"))
             actions = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_action(actions, data)
         
@@ -75,7 +76,7 @@ class client(object):
         ##############################################################################################
 
         for data in self.target_datas:
-            kwargs, option = get_switchgroup_args(data.get("TargetId"))
+            kwargs, option = get_switchgroup_args(data.get("Id"))
             switchgroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             if switchgroups is not None:
                 process_switchgroup(switchgroups, data)
@@ -116,6 +117,7 @@ class client(object):
                 attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                 if attens is not None:
                     process_atten(attens, self.atten_datas)
+
 
 
         print("pause")

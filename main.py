@@ -2,6 +2,7 @@ import time
 from wd_client import client as wdc
 
 from wd_sqlite_interface import *
+from wd_sqlite_utils import *
 from wd_config import *
 
 
@@ -16,9 +17,10 @@ def main():
     for key, value in sql_tables.items():
         create_table(key, value, c)
 
-    values = ["{123456-789-10111213-1415}", "Play_test", "{456456-56156-4565}", "Play", "{156156-4555645-1454154}"]
-
-    insert_data("Event", values, c, conn)
+    for i, datagroup in enumerate(client.datas):
+        for data in datagroup:
+            sql_values = data_convert(data)
+            # insert_data(i, sql_values, c, conn)
     
     client.disconnect()
 
