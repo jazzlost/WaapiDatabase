@@ -39,6 +39,10 @@ def process_switchgroup(switches, data):
         for key, value in switchgroup_config.items():
             if(switch.get(value) is not None):
                 data.setdefault(key, []).append(switch.get(value))
+            if "SwitchOrStateGroup" in data:
+                for value in data["SwitchOrStateGroup"]:
+                    data.setdefault(key, []).append(value)
+                del data["SwitchOrStateGroup"]
 
 
 def process_stategroup(switchgroup, statesgroup, data):
