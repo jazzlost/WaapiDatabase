@@ -84,26 +84,26 @@ class client(object):
         ##############################################################################################
         
         for data in self.target_datas:
-            if "TargetSwitchGroup" in data:
-                for switchgroup in data.get("TargetSwitchGroup"):
+            if "SwitchGroup" in data:
+                for switchgroup in data.get("SwitchGroup"):
                     kwargs, option = get_stategroup_args(switchgroup.get("id"))
                     stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                     if stategroups is not None:
                         process_stategroup(switchgroup, stategroups, data)
-                if len(data["TargetSwitchGroup"]) == 0:
-                    del data["TargetSwitchGroup"]
+                if len(data["SwitchGroup"]) == 0:
+                    del data["SwitchGroup"]
 
         ##############################################################################################
 
         for data in self.target_datas:
-            if "TargetSwitchGroup" in data:
-                for switchgroup in data.get("TargetSwitchGroup"):
+            if "SwitchGroup" in data:
+                for switchgroup in data.get("SwitchGroup"):
                     kwargs, option = get_children_args(switchgroup.get("id"))
                     switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                     if switches is not None:
                         process_switch(switchgroup, switches, self.switch_datas)
-            elif "TargetStateGroup" in data:
-                for stategroup in data.get("TargetStateGroup"):
+            elif "StateGroup" in data:
+                for stategroup in data.get("StateGroup"):
                     kwargs, option = get_children_args(stategroup.get("id"))
                     states = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                     if states is not None:
@@ -111,14 +111,15 @@ class client(object):
 
         ##############################################################################################
         for data in self.target_datas:
-            if "TargetAttenuation" in data:
-                atten = data.get("TargetAttenuation")
+            if "Attenuation" in data:
+                atten = data.get("Attenuation")
                 kwargs, option = get_atten_args(atten.get("id"))
                 attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                 if attens is not None:
                     process_atten(attens, self.atten_datas)
 
-
+        for data in self.target_datas:
+            process_none(data)
 
         print("pause")
         ##############################################################################################

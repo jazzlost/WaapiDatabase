@@ -8,7 +8,7 @@ def remove_last_comma(str):
 
 
 # convert waapi data to sqlite data
-def data_convert(waapi_data):
+def data_convert(waapi_data, only_id_for_sql):
     ret = []
     for key, value in waapi_data.items():
         if isinstance(value, type(True)):
@@ -18,6 +18,9 @@ def data_convert(waapi_data):
         elif isinstance(value, type({})):
             new_value = value.get("id")
             ret.append(new_value)
+            new_value = value.get("name")
+            if not only_id_for_sql:
+                ret.append(new_value)
             continue
         elif isinstance(value, type([])):
             new_value = ""
@@ -26,6 +29,13 @@ def data_convert(waapi_data):
                 new_value += ","
             new_value = remove_last_comma(new_value)
             ret.append(new_value)
+            if not only_id_for_sql:
+                new_value = ""
+                for v in value:
+                    new_value += v.get("name")
+                    new_value += ","
+                new_value = remove_last_comma(new_value)
+                ret.append(new_value)
             continue
         else:
             ret.append(value)

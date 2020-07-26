@@ -49,7 +49,7 @@ def process_stategroup(switchgroup, statesgroup, data):
     for state in statesgroup.get("return"):
         for key, value in stategroup_config.items():    
             if state.get("type") == value:
-                data["TargetSwitchGroup"].remove(switchgroup)
+                data["SwitchGroup"].remove(switchgroup)
                 data.setdefault(key, []).append(switchgroup)
 
 
@@ -76,3 +76,11 @@ def process_atten(attens, atten_datas):
             data.setdefault(key, atten.get(value))
 
         atten_datas.append(data)
+
+def process_none(data):
+    if "Attenuation" not in data:
+        data["Attenuation"] = None
+    if "SwitchGroup" not in data:
+        data["SwitchGroup"] = None
+    if "StateGroup" not in data:
+        data["StateGroup"] = None

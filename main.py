@@ -19,8 +19,12 @@ def main():
 
     for i, datagroup in enumerate(client.datas):
         for data in datagroup:
-            sql_values = data_convert(data)
-            # insert_data(i, sql_values, c, conn)
+            if i == 0 or i == 1:
+                sql_values = data_convert(data, True)
+            else:
+                sql_values = data_convert(data, False)
+            table = list(sql_tables.keys())[i]
+            insert_data(table, sql_values, c, conn)
     
     client.disconnect()
 

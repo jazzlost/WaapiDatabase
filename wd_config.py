@@ -29,7 +29,7 @@ target_condition_config = {
         {"Spatialization3D": "@@3DSpatialization"}
     ],
     "@@EnableAttenuation": [
-        {"TargetAttenuation": "@@Attenuation"}
+        {"Attenuation": "@@Attenuation"}
     ]
 }
 
@@ -38,11 +38,11 @@ target_validation_config = {
 }
 
 switchgroup_config = {
-    "TargetSwitchGroup": "@SwitchGroupOrStateGroup"
+    "SwitchGroup": "@SwitchGroupOrStateGroup"
 }
 
 stategroup_config = {
-    "TargetStateGroup": "StateGroup"
+    "StateGroup": "StateGroup"
 }
 
 atten_config = {
@@ -74,7 +74,8 @@ sql_target_table = {
     "UseListenerRelativeRoute": "INT DEFAULT 0",
     "Spatialization3D": "VARCHAR",
     "AttenId": "VARCHAR",
-    "SwitchOrStateGroupId": "VARCHAR"
+    "SwitchGroupId": "VARCHAR",
+    "StateGroupId": "VARCHAR"
 }
 
 sql_switch_table = {
