@@ -64,6 +64,18 @@ def query_columns(table_name, cursor):
     sql = "SELECT COUNT(*) FROM " + str(table_name)
     cursor.execute(sql)
     return cursor.fetchone()
+
+
+def query_database(sql, cursor):
+    if len(sql) > 0:
+        cursor.execute(sql)
+        return cursor.fetchall()
+
+
+def update_database(table_name, data):
+    # query_sql = "SELECT * FROM " + str(table_name) + 
+
+    # sql = "UPDATE " + str(table_name) +
     
 
 def data_entry():
@@ -98,7 +110,7 @@ def graph_data():
 
     plt.plot_date(dates, values, '-')
     plt.show()
-        
+
 
 def del_and_update():
     c.execute('SELECT * FROM waapiTable')
