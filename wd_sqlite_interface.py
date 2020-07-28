@@ -18,7 +18,7 @@ def close_database(cursor, conn):
     conn.close()
 
 
-def create_table(name, table, cursor):
+def create_table(name, table, cursor, conn):
     if len(table) > 0:
         sql = ""
         column = ""
@@ -28,21 +28,23 @@ def create_table(name, table, cursor):
         column = remove_last_comma(column)
         sql = "CREATE TABLE IF NOT EXISTS " + str(name) + "(" + column + ");"
         cursor.execute(sql)
+        conn.commit()
 
 
-def delete_table(table_name, cursor):
+def delete_table(table_name, cursor, conn):
     sql = "DROP TABLE IF EXISTS " + str(table_name)
     cursor.execute(sql)
+    conn.commit()
 
 
 # Make sure values num is equal to table's column num
-def insert_data(table, values, cursor, conn):
-    if len(table) > 0 and len(values) > 0:
+def insert_data(table_name, values, cursor, conn):
+    if len(table_name) > 0 and len(values) > 0:
         sql = ""
         sql_column = ""
         sql_value = ""
         
-        for key in sql_tables.get(str(table)).keys():
+        for key in sql_tables.get(str(table_name)).keys():
             phrase = str(key) + ","
             sql_column += phrase
         sql_column = remove_last_comma(sql_column)
@@ -52,10 +54,10 @@ def insert_data(table, values, cursor, conn):
             sql_value += phrase
         sql_value = remove_last_comma(sql_value)
 
-        if not columns_check(sql_value, sql_tables.get(table)):
+        if not columns_check(sql_value, sql_tables.get(table_name)):
             return
 
-        sql = "INSERT INTO " + str(table) + "(" + sql_column + ")" + " VALUES " + "(" + sql_value + ");"
+        sql = "INSERT INTO " + str(table_name) + "(" + sql_column + ")" + " VALUES " + "(" + sql_value + ");"
         cursor.execute(sql)
         conn.commit()
 
@@ -72,12 +74,26 @@ def query_database(sql, cursor):
         return cursor.fetchall()
 
 
-def update_database(table_name, data):
-    pass
-    # query_sql = "SELECT * FROM " + str(table_name) + 
+def update_database(table_name, data, cursor, conn):
+    query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data[0] + "'"
+    query_data = query_database(query_sql, cursor)
 
-    # sql = "UPDATE " + str(table_name) +
-    
+    update_property = {}
+
+    for i in range(len(query_data[0])):
+        if data[i] != query_data[0][i]:
+            column = list(sql_tables[table_name].keys())[i]
+            update_property[column] = data[i]
+
+    column_sql = ""
+    for column, value in update_property.items():
+        column_sql += str(column) + " = " + "'" + str(value) + "'" + ","
+    column_sql = remove_last_comma(column_sql)
+
+    sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + data[0] + "'"
+    cursor.execute(sql)
+    conn.commit()
+
 
 def data_entry():
     c.execute("INSERT INTO waapiTable VALUES(123456, '2020-07-10','python', 4)")
