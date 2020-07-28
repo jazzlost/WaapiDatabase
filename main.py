@@ -13,7 +13,8 @@ def main():
 
     client.handle_event()
 
-    c, conn = create_database("waapi")
+    c, conn = create_database(sql_database_name)
+    
     for key, value in sql_tables.items():
         create_table(key, value, c)
 
@@ -23,8 +24,14 @@ def main():
                 sql_values = data_convert(data, True)
             else:
                 sql_values = data_convert(data, False)
+            
             table = list(sql_tables.keys())[i]
             insert_data(table, sql_values, c, conn)
+
+    # for table in sql_tables.keys():
+    #     delete_table(table, c)
+
+    close_database(c, conn)
     
     client.disconnect()
 

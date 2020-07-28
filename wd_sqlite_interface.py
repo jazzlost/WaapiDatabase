@@ -13,7 +13,7 @@ def create_database(name):
     return c, conn
 
 
-def close_operation(cursor, conn):
+def close_database(cursor, conn):
     cursor.close()
     conn.close()
 
@@ -28,6 +28,11 @@ def create_table(name, table, cursor):
         column = remove_last_comma(column)
         sql = "CREATE TABLE IF NOT EXISTS " + str(name) + "(" + column + ");"
         cursor.execute(sql)
+
+
+def delete_table(table_name, cursor):
+    sql = "DROP TABLE IF EXISTS " + str(table_name)
+    cursor.execute(sql)
 
 
 # Make sure values num is equal to table's column num
@@ -47,13 +52,19 @@ def insert_data(table, values, cursor, conn):
             sql_value += phrase
         sql_value = remove_last_comma(sql_value)
 
+        # if not columns_check(sql_value, table):
+        #     return
+
         sql = "INSERT INTO " + str(table) + "(" + sql_column + ")" + " VALUES " + "(" + sql_value + ");"
         cursor.execute(sql)
         conn.commit()
 
 
-def query_data(table, columns):
-    pass
+def query_columns(table_name, cursor):
+    sql = "SELECT COUNT(*) FROM " + str(table_name)
+    cursor.execute(sql)
+    return cursor.fetchone()
+    
 
 def data_entry():
     c.execute("INSERT INTO waapiTable VALUES(123456, '2020-07-10','python', 4)")

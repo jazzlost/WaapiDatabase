@@ -54,6 +54,8 @@ atten_config = {
 
 ################################SQLite Config############################################
 
+sql_database_name = "waapi"
+
 sql_event_table = {
     "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
     "Name": "VARCHAR",
