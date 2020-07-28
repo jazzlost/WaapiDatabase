@@ -45,7 +45,7 @@ def data_convert(waapi_data, only_id):
 
 # Check sql is equal to database columns num
 def columns_check(sql, table):
-    column_num = sql.count(",") + 1
+    column_num = sql.count("'") / 2
     waapi_num = len(table)
     if column_num == waapi_num:
         return True

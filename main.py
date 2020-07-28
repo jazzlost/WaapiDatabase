@@ -14,6 +14,9 @@ def main():
     client.handle_event()
 
     c, conn = create_database(sql_database_name)
+
+    for table in sql_tables.keys():
+        delete_table(table, c)
     
     for key, value in sql_tables.items():
         create_table(key, value, c)
@@ -27,9 +30,6 @@ def main():
             
             table = list(sql_tables.keys())[i]
             insert_data(table, sql_values, c, conn)
-
-    # for table in sql_tables.keys():
-    #     delete_table(table, c)
 
     close_database(c, conn)
     

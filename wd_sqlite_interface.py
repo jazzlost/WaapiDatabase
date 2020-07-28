@@ -52,8 +52,8 @@ def insert_data(table, values, cursor, conn):
             sql_value += phrase
         sql_value = remove_last_comma(sql_value)
 
-        # if not columns_check(sql_value, table):
-        #     return
+        if not columns_check(sql_value, sql_tables.get(table)):
+            return
 
         sql = "INSERT INTO " + str(table) + "(" + sql_column + ")" + " VALUES " + "(" + sql_value + ");"
         cursor.execute(sql)
@@ -73,6 +73,7 @@ def query_database(sql, cursor):
 
 
 def update_database(table_name, data):
+    pass
     # query_sql = "SELECT * FROM " + str(table_name) + 
 
     # sql = "UPDATE " + str(table_name) +
