@@ -31,8 +31,8 @@ def main():
     #         table = list(sql_tables.keys())[i]
     #         insert_data(table, sql_values, conn)
 
-    value = ["{BE62A221-4503-4000-BF91-55F767088450}", "Play_Change", "{1F7CFB54-E9A0-408A-9524-D142401504A6}", 2, "{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}"]
-    update_database("Event", value, conn)
+    value = ["{BE62A22-4503-4000-BF91-55F767088450}", "Play_Change", "{1F7CFB54-E9A0-408A-9524-D142401504A6}", 2, "{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}"]
+    update_data("Event", value, conn)
 
     close_database(conn)
     

@@ -66,23 +66,21 @@ def insert_data(table_name, values, conn):
         safe_execute(sql, conn)
 
 
-def query_database(sql, conn):
+def query_data(sql, conn):
     if len(sql) > 0:
         cursor = conn.cursor()
         cursor.execute(sql)
-        data = cursor.fetchall()
-        cursor.close()
-        return data
+        return cursor.fetchall()
 
 
-def update_database(table_name, data, conn):
+def update_data(table_name, data, conn):
     query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data[0] + "'"
-    query_data = query_database(query_sql, conn)
+    query_datas = query_data(query_sql, conn)
 
     update_property = {}
 
-    for i in range(len(query_data[0])):
-        if data[i] != query_data[0][i]:
+    for i in range(len(query_datas[0])):
+        if data[i] != query_datas[0][i]:
             column = list(sql_tables[table_name].keys())[i]
             update_property[column] = data[i]
 
@@ -92,6 +90,11 @@ def update_database(table_name, data, conn):
     column_sql = remove_last_comma(column_sql)
 
     sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + data[0] + "'"
+    safe_execute(sql, conn)
+
+
+def delete_data(table_name, Id, conn):
+    sql = "DELETE FROM " + str(table_name) + " " + "WHERE Id = " + "'" + Id + "'"
     safe_execute(sql, conn)
 
 
