@@ -13,13 +13,13 @@ def main():
 
     # client.handle_event()
 
-    c, conn = create_database(sql_database_name)
+    conn = create_database(sql_database_name)
 
     # for table in sql_tables.keys():
-    #     delete_table(table, c, conn)
+    #     delete_table(table, conn)
     
     # for key, value in sql_tables.items():
-    #     create_table(key, value, c, conn)
+    #     create_table(key, value, conn)
 
     # for i, datagroup in enumerate(client.datas):
     #     for data in datagroup:
@@ -29,12 +29,12 @@ def main():
     #             sql_values = data_convert(data, False)
             
     #         table = list(sql_tables.keys())[i]
-    #         insert_data(table, sql_values, c, conn)
+    #         insert_data(table, sql_values, conn)
 
     value = ["{BE62A221-4503-4000-BF91-55F767088450}", "Play_Change", "{1F7CFB54-E9A0-408A-9524-D142401504A6}", 2, "{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}"]
-    update_database("Event", value, c, conn)
+    update_database("Event", value, conn)
 
-    close_database(c, conn)
+    close_database(conn)
     
     client.disconnect()
 

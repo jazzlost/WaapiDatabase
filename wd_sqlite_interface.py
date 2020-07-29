@@ -9,16 +9,23 @@ from wd_sqlite_utils import *
 def create_database(name):
     fullname = name + ".db"
     conn = sqlite3.connect(fullname)
-    c = conn.cursor()
-    return c, conn
+    return conn
 
 
-def close_database(cursor, conn):
+def close_database(conn):
+    cursor = conn.cursor()
     cursor.close()
     conn.close()
 
 
-def create_table(name, table, cursor, conn):
+def safe_execute(sql, conn):
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    conn.commit()
+    cursor.close()
+
+
+def create_table(name, table, conn):
     if len(table) > 0:
         sql = ""
         column = ""
@@ -27,18 +34,16 @@ def create_table(name, table, cursor, conn):
             column += phrase
         column = remove_last_comma(column)
         sql = "CREATE TABLE IF NOT EXISTS " + str(name) + "(" + column + ");"
-        cursor.execute(sql)
-        conn.commit()
+        safe_execute(sql, conn)
 
 
-def delete_table(table_name, cursor, conn):
+def delete_table(table_name, conn):
     sql = "DROP TABLE IF EXISTS " + str(table_name)
-    cursor.execute(sql)
-    conn.commit()
+    safe_execute(sql, conn)
 
 
 # Make sure values num is equal to table's column num
-def insert_data(table_name, values, cursor, conn):
+def insert_data(table_name, values, conn):
     if len(table_name) > 0 and len(values) > 0:
         sql = ""
         sql_column = ""
@@ -58,25 +63,21 @@ def insert_data(table_name, values, cursor, conn):
             return
 
         sql = "INSERT INTO " + str(table_name) + "(" + sql_column + ")" + " VALUES " + "(" + sql_value + ");"
-        cursor.execute(sql)
-        conn.commit()
+        safe_execute(sql, conn)
 
 
-def query_columns(table_name, cursor):
-    sql = "SELECT COUNT(*) FROM " + str(table_name)
-    cursor.execute(sql)
-    return cursor.fetchone()
-
-
-def query_database(sql, cursor):
+def query_database(sql, conn):
     if len(sql) > 0:
+        cursor = conn.cursor()
         cursor.execute(sql)
-        return cursor.fetchall()
+        data = cursor.fetchall()
+        cursor.close()
+        return data
 
 
-def update_database(table_name, data, cursor, conn):
+def update_database(table_name, data, conn):
     query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data[0] + "'"
-    query_data = query_database(query_sql, cursor)
+    query_data = query_database(query_sql, conn)
 
     update_property = {}
 
@@ -91,8 +92,7 @@ def update_database(table_name, data, cursor, conn):
     column_sql = remove_last_comma(column_sql)
 
     sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + data[0] + "'"
-    cursor.execute(sql)
-    conn.commit()
+    safe_execute(sql, conn)
 
 
 def data_entry():
