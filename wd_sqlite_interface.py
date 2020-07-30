@@ -73,23 +73,27 @@ def query_data(sql, conn):
         return cursor.fetchall()
 
 
-def update_data(table_name, data, conn):
+def diff_data(table_name, data, conn):
     query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data[0] + "'"
     query_datas = query_data(query_sql, conn)
 
-    update_property = {}
+    diff_property = {}
 
     for i in range(len(query_datas[0])):
         if data[i] != query_datas[0][i]:
             column = list(sql_tables[table_name].keys())[i]
-            update_property[column] = data[i]
+            diff_property[column] = data[i]
 
     column_sql = ""
-    for column, value in update_property.items():
+    for column, value in diff_property.items():
         column_sql += str(column) + " = " + "'" + str(value) + "'" + ","
     column_sql = remove_last_comma(column_sql)
 
-    sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + data[0] + "'"
+    return column_sql
+
+
+def update_data(table_name, column_sql, id, conn):
+    sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + id + "'"
     safe_execute(sql, conn)
 
 
