@@ -94,3 +94,15 @@ def get_atten_args(atten_id):
     }, {
         "return": ["id", "name", "@@RadiusMax", "@@ConeUse"]
     }
+
+
+def get_rtpc_args():
+    return {
+        "from": {
+            "ofType": [
+                "GameParameter"
+                ]
+            }
+    }, {
+        "return": ["id", "name", "@BindToBuiltInParam", "@InitialValue", "@Max", "@Min"]
+    }

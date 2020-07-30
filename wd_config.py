@@ -52,6 +52,15 @@ atten_config = {
     "UseCone": "@@ConeUse"
 }
 
+rtpc_config = {
+    "Id": "id",
+    "Name": "name",
+    "UseBuildInParam": "@BindToBuiltInParam",
+    "DefaultValue": "@InitialValue",
+    "Max": "@Max",
+    "Min": "@Min"
+}
+
 ################################SQLite Config############################################
 
 sql_database_name = "waapi"

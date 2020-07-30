@@ -11,9 +11,9 @@ def main():
     client = wdc()
     client.connect()
 
-    # client.handle_event()
+    client.handle_event()
 
-    conn = create_database(sql_database_name)
+    # conn = create_database(sql_database_name)
 
     # for table in sql_tables.keys():
     #     delete_table(table, conn)
@@ -31,10 +31,10 @@ def main():
     #         table = list(sql_tables.keys())[i]
     #         insert_data(table, sql_values, conn)
 
-    value = ["{BE62A22-4503-4000-BF91-55F767088450}", "Play_Change", "{1F7CFB54-E9A0-408A-9524-D142401504A6}", 2, "{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}"]
-    update_data("Event", value, conn)
+    # value = ["{BE62A22-4503-4000-BF91-55F767088450}", "Play_Change", "{1F7CFB54-E9A0-408A-9524-D142401504A6}", 2, "{ECA4B107-100C-43B6-928E-DCEDCA7A4FC9}"]
+    # update_data("Event", value, conn)
 
-    close_database(conn)
+    # close_database(conn)
     
     client.disconnect()
 

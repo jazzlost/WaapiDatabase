@@ -15,6 +15,7 @@ class client(object):
         self.switch_datas = []
         self.state_datas = []
         self.atten_datas = []
+        self.rtpc_datas = []
 
         self.datas = [self.event_datas, self.target_datas, self.switch_datas, self.state_datas, self.atten_datas]
 
@@ -117,7 +118,11 @@ class client(object):
                 attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                 if attens is not None:
                     process_atten(attens, self.atten_datas)
-
+        
+        rtpc_kwagrs, rtpc_option = get_rtpc_args()
+        rtpcs = self.client.call("ak.wwise.core.object.get", **rtpc_kwagrs, options=rtpc_option)
+        process_rtpc(rtpcs, self.rtpc_datas)
+      
         for data in self.target_datas:
             process_none(data)
 
