@@ -17,7 +17,7 @@ class client(object):
         self.atten_datas = []
         self.rtpc_datas = []
 
-        self.datas = [self.event_datas, self.target_datas, self.switch_datas, self.state_datas, self.atten_datas]
+        self.datas = [self.event_datas, self.target_datas, self.switch_datas, self.state_datas, self.atten_datas, self.rtpc_datas]
 
     def __del__(self):
         self.disconnect()

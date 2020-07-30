@@ -110,10 +110,20 @@ sql_atten_table = {
     "UseCone": "INT"
 }
 
+sql_rtpc_table = {
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "UseBuildInParam": "INT",
+    "DefaultValue": "REAL",
+    "MAX": "REAL",
+    "MIN": "REAL"
+}
+
 sql_tables = {
     "Event": sql_event_table,
     "Target": sql_target_table,
     "Switch": sql_switch_table,
     "State": sql_state_table,
-    "Attenuation": sql_atten_table
+    "Attenuation": sql_atten_table,
+    "RTPC": sql_rtpc_table
 }

@@ -79,11 +79,10 @@ def process_atten(attens, atten_datas):
 
 
 def process_rtpc(rtpcs, rtpc_datas):
-    data = {}
     for rtpc in rtpcs.get("return"):
+        data = {}
         for key, value in rtpc_config.items():
             data.setdefault(key, rtpc.get(value))
-
         rtpc_datas.append(data)
 
 
