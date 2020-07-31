@@ -40,18 +40,18 @@ class client(object):
 
 
     ############################################################################################
-    def handle_project(self):
+    # def handle_project(self):
         
-        myArgs = {
-            "from": {
-                "ofType": [
-                    "Project"
-                ]
-            }
-        }
+    #     myArgs = {
+    #         "from": {
+    #             "ofType": [
+    #                 "Project"
+    #             ]
+    #         }
+    #     }
 
-        wwise_info = self.client.call("ak.wwise.core.getInfo")
-        project_info = self.client.call("ak.wwise.core.object.get", **myArgs)
+    #     wwise_info = self.client.call("ak.wwise.core.getInfo")
+    #     project_info = self.client.call("ak.wwise.core.object.get", **myArgs)
         # self.data.add_project_data(wwise_info)
         # self.data.add_project_data(project_info)
         # self.data.get_project_data()
@@ -66,13 +66,19 @@ class client(object):
             kwargs, option = get_action_args(data.get("Id"))
             actions = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_action(actions, data)
+            
+            if "Target" in data:
+                kwargs, option = get_target_args(data["Target"].get("id"))
+                targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                process_target(targets, self.target_datas)
+
         
         ##############################################################################################
         
-        for data in self.event_datas:
-            kwargs, option = get_target_args(data.get("Target").get("id"))
-            targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-            process_target(targets, self.target_datas)
+        # for data in self.event_datas:
+        #     kwargs, option = get_target_args(data.get("Target").get("id"))
+        #     targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+        #     process_target(targets, self.target_datas)
 
         ##############################################################################################
 
@@ -82,9 +88,6 @@ class client(object):
             if switchgroups is not None:
                 process_switchgroup(switchgroups, data)
 
-        ##############################################################################################
-        
-        for data in self.target_datas:
             if "SwitchGroup" in data:
                 for switchgroup in data.get("SwitchGroup"):
                     kwargs, option = get_stategroup_args(switchgroup.get("id"))
@@ -94,9 +97,6 @@ class client(object):
                 if len(data["SwitchGroup"]) == 0:
                     del data["SwitchGroup"]
 
-        ##############################################################################################
-
-        for data in self.target_datas:
             if "SwitchGroup" in data:
                 for switchgroup in data.get("SwitchGroup"):
                     kwargs, option = get_children_args(switchgroup.get("id"))
@@ -110,21 +110,63 @@ class client(object):
                     if states is not None:
                         process_state(stategroup, states, self.state_datas)
 
-        ##############################################################################################
-        for data in self.target_datas:
             if "Attenuation" in data:
                 atten = data.get("Attenuation")
                 kwargs, option = get_atten_args(atten.get("id"))
                 attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                 if attens is not None:
                     process_atten(attens, self.atten_datas)
-        
+
         rtpc_kwagrs, rtpc_option = get_rtpc_args()
         rtpcs = self.client.call("ak.wwise.core.object.get", **rtpc_kwagrs, options=rtpc_option)
         process_rtpc(rtpcs, self.rtpc_datas)
-      
+
         for data in self.target_datas:
             process_none(data)
+
+        ##############################################################################################
+        
+        # for data in self.target_datas:
+        #     if "SwitchGroup" in data:
+        #         for switchgroup in data.get("SwitchGroup"):
+        #             kwargs, option = get_stategroup_args(switchgroup.get("id"))
+        #             stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+        #             if stategroups is not None:
+        #                 process_stategroup(switchgroup, stategroups, data)
+        #         if len(data["SwitchGroup"]) == 0:
+        #             del data["SwitchGroup"]
+
+        ##############################################################################################
+
+        # for data in self.target_datas:
+        #     if "SwitchGroup" in data:
+        #         for switchgroup in data.get("SwitchGroup"):
+        #             kwargs, option = get_children_args(switchgroup.get("id"))
+        #             switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+        #             if switches is not None:
+        #                 process_switch(switchgroup, switches, self.switch_datas)
+        #     elif "StateGroup" in data:
+        #         for stategroup in data.get("StateGroup"):
+        #             kwargs, option = get_children_args(stategroup.get("id"))
+        #             states = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+        #             if states is not None:
+        #                 process_state(stategroup, states, self.state_datas)
+
+        ##############################################################################################
+        # for data in self.target_datas:
+        #     if "Attenuation" in data:
+        #         atten = data.get("Attenuation")
+        #         kwargs, option = get_atten_args(atten.get("id"))
+        #         attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+        #         if attens is not None:
+        #             process_atten(attens, self.atten_datas)
+        
+        # rtpc_kwagrs, rtpc_option = get_rtpc_args()
+        # rtpcs = self.client.call("ak.wwise.core.object.get", **rtpc_kwagrs, options=rtpc_option)
+        # process_rtpc(rtpcs, self.rtpc_datas)
+      
+        # for data in self.target_datas:
+        #     process_none(data)
 
         print("pause")
         ##############################################################################################

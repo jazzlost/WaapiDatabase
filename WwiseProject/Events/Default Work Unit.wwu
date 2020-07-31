@@ -47,6 +47,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_New" ID="{FFB2E624-3C53-4D4B-AB23-4A9196BB4638}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

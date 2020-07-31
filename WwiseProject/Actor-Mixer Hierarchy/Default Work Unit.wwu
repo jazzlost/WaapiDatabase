@@ -57,7 +57,7 @@
 						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>-10</Value>
+								<Value>-5</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -187,10 +187,20 @@
 								</RTPC>
 							</RTPCList>
 						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>2</Value>
+							</ValueList>
+						</Property>
 						<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 						<Property Name="UseMaxSoundPerInstance" Type="bool">
 							<ValueList>
 								<Value>True</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>12</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -263,6 +273,11 @@
 								<Value>40</Value>
 							</ValueList>
 						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>10</Value>
+							</ValueList>
+						</Property>
 						<Property Name="UseMaxSoundPerInstance" Type="bool">
 							<ValueList>
 								<Value>True</Value>
@@ -270,7 +285,7 @@
 						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>10</Value>
+								<Value>-20</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -329,7 +344,7 @@
 						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
 						<Property Name="Lowpass" Type="int16">
 							<ValueList>
-								<Value>40</Value>
+								<Value>50</Value>
 							</ValueList>
 						</Property>
 						<Property Name="MaxSoundPerInstance" Type="int16">

@@ -73,6 +73,16 @@ def query_data(sql, conn):
         return cursor.fetchall()
 
 
+def is_new_id(table_name, data, conn):
+    query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data.get("Id") + "'"
+    query_datas = query_data(query_sql, conn)
+
+    if len(query_datas) > 0:
+        return False
+    else:
+        return True
+
+
 def diff_data(table_name, data, conn):
     query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data[0] + "'"
     query_datas = query_data(query_sql, conn)
@@ -84,17 +94,24 @@ def diff_data(table_name, data, conn):
             column = list(sql_tables[table_name].keys())[i]
             diff_property[column] = data[i]
 
+    if len(diff_property) <= 0:
+        return "", ""
+
     column_sql = ""
     for column, value in diff_property.items():
         column_sql += str(column) + " = " + "'" + str(value) + "'" + ","
     column_sql = remove_last_comma(column_sql)
 
-    return column_sql
+    if len(column_sql) <= 0:
+        return "", ""
+
+    return column_sql, data[0]
 
 
 def update_data(table_name, column_sql, id, conn):
-    sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + id + "'"
-    safe_execute(sql, conn)
+    if len(table_name) > 0 and len(column_sql) > 0 and len(id) > 0:
+        sql = "UPDATE " + str(table_name) + " SET " + column_sql + " WHERE ID = " + "'" + id + "'"
+        safe_execute(sql, conn)
 
 
 def delete_data(table_name, Id, conn):
