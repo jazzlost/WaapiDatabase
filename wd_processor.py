@@ -26,6 +26,8 @@ def process_target(targets, datas):
                 for pair in condition_value:
                     for key, value in pair.items():
                         data.setdefault(key, target.get(value))
+            else:
+                data.setdefault("Attenuation", None)
         
         for validation_key, validation_value in target_validation_config.items():
             if target.get(validation_value) is not None:

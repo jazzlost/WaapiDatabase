@@ -94,8 +94,8 @@ class client(object):
                     stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                     if stategroups is not None:
                         process_stategroup(switchgroup, stategroups, data)
-                if len(data["SwitchGroup"]) == 0:
-                    del data["SwitchGroup"]
+                # if len(data["SwitchGroup"]) == 0:
+                #     del data["SwitchGroup"]
 
             if "SwitchGroup" in data:
                 for switchgroup in data.get("SwitchGroup"):
@@ -112,10 +112,11 @@ class client(object):
 
             if "Attenuation" in data:
                 atten = data.get("Attenuation")
-                kwargs, option = get_atten_args(atten.get("id"))
-                attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-                if attens is not None:
-                    process_atten(attens, self.atten_datas)
+                if atten is not None:
+                    kwargs, option = get_atten_args(atten.get("id"))
+                    attens = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                    if attens is not None:
+                        process_atten(attens, self.atten_datas)
 
         rtpc_kwagrs, rtpc_option = get_rtpc_args()
         rtpcs = self.client.call("ak.wwise.core.object.get", **rtpc_kwagrs, options=rtpc_option)
