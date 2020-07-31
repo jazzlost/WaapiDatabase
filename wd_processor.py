@@ -54,7 +54,7 @@ def process_stategroup(switchgroup, statesgroup, data):
 
 
 def process_switch(switchgroup, switches, switch_datas):
-    data = {"SwitchGroup": switchgroup, "SwitchState": []}
+    data = {"Id": switchgroup["id"], "Name": switchgroup["name"], "SwitchState": []}
     for switch in switches.get("return"):
         data["SwitchState"].append(switch)
 
@@ -62,7 +62,7 @@ def process_switch(switchgroup, switches, switch_datas):
 
 
 def process_state(stategroup, states, state_datas):
-    data = {"StateGroup": stategroup, "State": []}
+    data = {"Id": stategroup["id"], "Name": stategroup["name"], "State": []}
     for state in states.get("return"):
         data["State"].append(state)
 

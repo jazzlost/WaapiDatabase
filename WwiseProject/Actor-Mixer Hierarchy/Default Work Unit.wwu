@@ -189,7 +189,7 @@
 						</Property>
 						<Property Name="Pitch" Type="int32">
 							<ValueList>
-								<Value>2</Value>
+								<Value>12</Value>
 							</ValueList>
 						</Property>
 						<Property Name="RandomOrSequence" Type="int16" Value="0"/>
