@@ -91,7 +91,13 @@ def process_rtpc(rtpcs, rtpc_datas):
 def process_none(data):
     if "Attenuation" not in data:
         data["Attenuation"] = None
+
     if "SwitchGroup" not in data:
-        data["SwitchGroup"] = []
+        data["SwitchGroup"] = None
+    elif len(data["SwitchGroup"]) == 0:
+        data["SwitchGroup"] = None
+
     if "StateGroup" not in data:
-        data["StateGroup"] = []
+        data["StateGroup"] = None
+    elif len(data["StateGroup"]) == 0:
+        data["StateGroup"] = None
