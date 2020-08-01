@@ -24,17 +24,23 @@ def data_convert(waapi_data, only_id):
             continue
         elif isinstance(value, type([])):
             new_value = ""
-            for v in value:
-                new_value += v.get("id")
-                new_value += ","
-            new_value = remove_last_comma(new_value)
+            if len(value) == 0:
+                new_value = "None"
+            else:
+                for v in value:
+                    new_value += v.get("id")
+                    new_value += ","
+                new_value = remove_last_comma(new_value)
             ret.append(new_value)
             if not only_id:
                 new_value = ""
-                for v in value:
-                    new_value += v.get("name")
-                    new_value += ","
-                new_value = remove_last_comma(new_value)
+                if len(value) == 0:
+                    new_value = "None"
+                else:
+                    for v in value:
+                        new_value += v.get("name")
+                        new_value += ","
+                    new_value = remove_last_comma(new_value)
                 ret.append(new_value)
             continue
         else:

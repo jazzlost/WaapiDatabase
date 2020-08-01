@@ -92,6 +92,6 @@ def process_none(data):
     if "Attenuation" not in data:
         data["Attenuation"] = None
     if "SwitchGroup" not in data:
-        data["SwitchGroup"] = None
+        data["SwitchGroup"] = []
     if "StateGroup" not in data:
-        data["StateGroup"] = None
+        data["StateGroup"] = []
