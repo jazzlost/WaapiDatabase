@@ -86,15 +86,16 @@ class client(object):
 
             if "SwitchGroup" in data:
                 for switchgroup in data.get("SwitchGroup"):
-                    kwargs, option = get_stategroup_args(switchgroup.get("id"))
-                    stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-                    if stategroups is not None:
-                        process_stategroup(switchgroup, stategroups, data)
-
                     kwargs, option = get_children_args(switchgroup.get("id"))
                     switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
                     if switches is not None:
                         process_switch(switchgroup, switches, self.switch_datas)
+            
+                    kwargs, option = get_stategroup_args(switchgroup.get("id"))
+                    stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                    if stategroups is not None:
+                        process_stategroup(switchgroup, stategroups, data, self.switch_datas)
+
             
             if "StateGroup" in data:
                 for stategroup in data.get("StateGroup"):

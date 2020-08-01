@@ -6,8 +6,8 @@ from wd_config import sql_tables
 
 from wd_sqlite_utils import *
 
-def create_database(name):
-    fullname = name + ".db"
+def create_database(path, name):
+    fullname = path + "/" + name + ".db"
     conn = sqlite3.connect(fullname)
     return conn
 

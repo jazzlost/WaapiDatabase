@@ -13,7 +13,7 @@ def main():
 
     client.handle_event()
 
-    conn = create_database(sql_database_name)
+    conn = create_database(sql_database_path, sql_database_name)
 
     # for table in sql_tables.keys():
     #     delete_table(table, conn)

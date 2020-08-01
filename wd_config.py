@@ -62,7 +62,7 @@ rtpc_config = {
 }
 
 ################################SQLite Config############################################
-
+sql_database_path = "D:/Project/Code/WaapiDatabase"
 sql_database_name = "waapi"
 
 sql_event_table = {

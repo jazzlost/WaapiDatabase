@@ -47,12 +47,15 @@ def process_switchgroup(switches, data):
                 del data["SwitchOrStateGroup"]
 
 
-def process_stategroup(switchgroup, statesgroup, data):
+def process_stategroup(switchgroup, statesgroup, data, switch_datas):
     for state in statesgroup.get("return"):
         for key, value in stategroup_config.items():    
             if state.get("type") == value:
                 data["SwitchGroup"].remove(switchgroup)
                 data.setdefault(key, []).append(switchgroup)
+                for data in switch_datas:
+                    if switchgroup["id"] == data["Id"]:
+                        switch_datas.remove(data)
 
 
 def process_switch(switchgroup, switches, switch_datas):
