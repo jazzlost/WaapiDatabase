@@ -61,18 +61,21 @@ class client(object):
         events = self.client.call("ak.wwise.core.object.get", get_event_args())
         process_event(events, self.event_datas)
         ##############################################################################################
+        
+        target_id = set()
 
         for data in self.event_datas:
             kwargs, option = get_action_args(data.get("Id"))
             actions = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             process_action(actions, data)
-            
-            if "Target" in data:
-                kwargs, option = get_target_args(data["Target"].get("id"))
-                targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-                process_target(targets, self.target_datas)
+            for t in data.get("Target"):
+                target_id.add(t.get("id"))
 
-        
+        for id in target_id:
+            kwargs, option = get_target_args(id)
+            targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+            process_target(targets, self.target_datas)
+
         ##############################################################################################
 
         for data in self.target_datas:

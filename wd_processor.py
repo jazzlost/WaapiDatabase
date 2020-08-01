@@ -12,7 +12,7 @@ def process_event(events, datas):
 def process_action(actions, data):
     for action in actions.get("return"):
         for key, value in action_config.items():
-            data.setdefault(key, action.get(value))
+            data.setdefault(key, []).append(action.get(value))
 
 
 def process_target(targets, datas):

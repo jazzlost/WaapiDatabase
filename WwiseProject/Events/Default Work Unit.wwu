@@ -47,7 +47,24 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_New" ID="{FFB2E624-3C53-4D4B-AB23-4A9196BB4638}"/>
+				<Event Name="Play_New" ID="{FFB2E624-3C53-4D4B-AB23-4A9196BB4638}">
+					<ChildrenList>
+						<Action Name="" ID="{48332D8D-F73D-42E5-AF53-7517D7B4FF2F}" ShortID="1024256982">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Weapon" ID="{46EF1EF0-6C5E-4E43-A9BF-E491E3881EBB}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{E7085696-F0E3-408A-A12F-116DCF039C22}" ShortID="846836233">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Vehicle" ID="{EE59A588-55BB-4409-BC88-D04EEAB0E276}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
