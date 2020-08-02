@@ -56,7 +56,7 @@ class client(object):
         # self.data.add_project_data(project_info)
         # self.data.get_project_data()
 
-    def handle_event(self):
+    def catch_datas(self):
 
         events = self.client.call("ak.wwise.core.object.get", get_event_args())
         process_event(events, self.event_datas)

@@ -21,17 +21,9 @@ def process_target(targets, datas):
         for key, value in target_config.items():
             data.setdefault(key, target.get(value))
         
-        for condition_key, condition_value in target_condition_config.items():
-            if(target.get(condition_key) is not False):
-                for pair in condition_value:
-                    for key, value in pair.items():
-                        data.setdefault(key, target.get(value))
-            else:
-                data.setdefault("Attenuation", None)
-        
-        for validation_key, validation_value in target_validation_config.items():
-            if target.get(validation_value) is not None:
-                data.setdefault(validation_key, []).append(target.get(validation_value))
+        for key, value in target_list_config.items():
+            if target.get(value) is not None:
+                data.setdefault(key, []).append(target.get(value))
 
         datas.append(data)
 
@@ -97,15 +89,17 @@ def process_none(data, datas_name):
 
     # Event Datas
     if datas_name == "event_datas":
-        event_list = list(event_config.keys())
-        event_list += list(action_config.keys())
-        for key in event_list:
+        props = list(event_config.keys())
+        props += list(action_config.keys())
+        for key in props:
             if key not in data:
                 data[key] = None
     # Target_datas
     elif datas_name == "target_datas":
-        if "Attenuation" not in data:
-            data["Attenuation"] = None
+        props = list(target_config.keys())
+        for key in props:
+            if key not in data:
+                data[key] = None
 
         if "SwitchGroup" not in data:
             data["SwitchGroup"] = None

@@ -22,7 +22,7 @@ def main():
     client = wdc()
     client.connect()
 
-    client.handle_event()
+    client.catch_datas()
 
     conn = create_database(sql_database_path, sql_database_name)
 

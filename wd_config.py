@@ -20,20 +20,13 @@ target_config = {
     "LPF": "@Lowpass",
     "HPF": "@Highpass",
     "UseMaxSoundInstance": "@@UseMaxSoundPerInstance",
-    "MaxSound": "@@UseMaxSoundPerInstance"
+    "MaxSound": "@@UseMaxSoundPerInstance",
+    "UseListenerRelativeRoute": "@@ListenerRelativeRouting",
+    "Spatialization3D": "@@3DSpatialization",
+    "Attenuation": "@@Attenuation"
 }
 
-target_condition_config = {
-    "@@ListenerRelativeRouting": [
-        {"UseListenerRelativeRoute": "@@ListenerRelativeRouting"},
-        {"Spatialization3D": "@@3DSpatialization"}
-    ],
-    "@@EnableAttenuation": [
-        {"Attenuation": "@@Attenuation"}
-    ]
-}
-
-target_validation_config = {
+target_list_config = {
     "SwitchOrStateGroup": "@SwitchGroupOrStateGroup"
 }
 
