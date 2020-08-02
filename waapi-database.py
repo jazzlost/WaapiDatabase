@@ -6,18 +6,12 @@ from wd_config import *
 
 
 def main():
-
-    # if len(sys.argv) < 2:
-    #     return
-
-    # sql_database_path = sys.argv[1]
-    # if len(sys.argv) > 2:
-    #     sql_database_name = sys.argv[2]
-    # else:
-        # sql_database_name = "waapi"
-
-    sql_database_name = "waapi"
-    sql_database_path = "./"
+    if len(sys.argv) < 2:
+        sql_database_path = "../"
+        sql_database_name = "waapi"
+    else:
+        sql_database_path = sys.argv[1]
+        sql_database_name = sys.argv[2]
 
     client = wdc()
     client.connect()
@@ -34,7 +28,7 @@ def main():
 
     for i, datagroup in enumerate(client.datas):
         for data in datagroup:
-            if i == 0 or i == 1:
+            if i == 1 or i == 2:
                 sql_values = data_convert(data, True)
             else:
                 sql_values = data_convert(data, False)

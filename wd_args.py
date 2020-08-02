@@ -1,5 +1,13 @@
 from wd_config import *
 
+def get_project_args():
+    return {
+        "from": {
+            "ofType": [
+                "Project"
+            ]
+        }
+    }
 def get_event_args():
     return {
         "from": {

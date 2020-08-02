@@ -1,5 +1,14 @@
 from wd_config import *
 
+def process_project(wwise_info, project_info, datas):
+    data = {}
+    version = wwise_info.get("version").get("displayName")
+    data["Version"] = version
+    for p in project_info.get("return"):
+        data["Id"] = p.get("id")
+        data["Name"] = p.get("name")
+    datas.append(data)
+
 
 def process_event(events, datas):
     for event in events.get("return"):

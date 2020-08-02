@@ -10,6 +10,7 @@ class client(object):
     def __init__(self, url=None):
         self.url = url
         self.client = connect(url)
+        self.project_datas = []
         self.event_datas = []
         self.target_datas = []
         self.switch_datas = []
@@ -17,7 +18,7 @@ class client(object):
         self.atten_datas = []
         self.rtpc_datas = []
 
-        self.datas = [self.event_datas, self.target_datas, self.switch_datas, self.state_datas, self.atten_datas, self.rtpc_datas]
+        self.datas = [self.project_datas, self.event_datas, self.target_datas, self.switch_datas, self.state_datas, self.atten_datas, self.rtpc_datas]
 
     def __del__(self):
         self.disconnect()
@@ -58,9 +59,15 @@ class client(object):
 
     def catch_datas(self):
 
+        kwargs = get_project_args()
+        wwise_info = self.client.call("ak.wwise.core.getInfo")
+        project_info = self.client.call("ak.wwise.core.object.get", **kwargs)
+        process_project(wwise_info, project_info, self.project_datas)
+
+
+        ##############################################################################################
         events = self.client.call("ak.wwise.core.object.get", get_event_args())
         process_event(events, self.event_datas)
-        ##############################################################################################
         
         target_id = set()
 

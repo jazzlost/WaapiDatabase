@@ -56,6 +56,12 @@ rtpc_config = {
 
 ################################SQLite Config############################################
 
+sql_project_table = {
+    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
+    "Name": "VARCHAR",
+    "Version": "VARCHAR"
+}
+
 sql_event_table = {
     "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
     "Name": "VARCHAR",
@@ -111,6 +117,7 @@ sql_rtpc_table = {
 }
 
 sql_tables = {
+    "Project": sql_project_table,
     "Event": sql_event_table,
     "Target": sql_target_table,
     "Switch": sql_switch_table,
