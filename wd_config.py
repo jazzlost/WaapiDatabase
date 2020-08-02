@@ -1,5 +1,4 @@
-
-################################Waapi Config############################################
+################################ Waapi Config ############################################
 
 event_config = {
    "Id": "id",
@@ -12,6 +11,7 @@ action_config = {
     "Target": "@Target"
 }
 
+# Dict properties for target
 target_config = {
     "Id": "id",
     "Name": "name",
@@ -26,6 +26,7 @@ target_config = {
     "Attenuation": "@@Attenuation"
 }
 
+# List properties for target
 target_list_config = {
     "SwitchOrStateGroup": "@SwitchGroupOrStateGroup"
 }
@@ -54,7 +55,7 @@ rtpc_config = {
     "Min": "@Min"
 }
 
-################################SQLite Config############################################
+################################ SQLite Config ############################################
 
 sql_project_table = {
     "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",

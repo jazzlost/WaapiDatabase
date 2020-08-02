@@ -1,3 +1,4 @@
+##################################### Program Entrance #######################################################
 import sys
 from wd_client import client as wdc
 from wd_sqlite_interface import *
@@ -6,6 +7,7 @@ from wd_config import *
 
 
 def main():
+    # Get path and name argv
     if len(sys.argv) < 2:
         sql_database_path = "../"
         sql_database_name = "waapi"
@@ -13,19 +15,18 @@ def main():
         sql_database_path = sys.argv[1]
         sql_database_name = sys.argv[2]
 
+    # Make WAMP client
     client = wdc()
+    # Make WAMP connection
     client.connect()
-
+    # Catch waapi datas
     client.catch_datas()
-
+    # Create database
     conn = create_database(sql_database_path, sql_database_name)
-
-    # for table in sql_tables.keys():
-    #     delete_table(table, conn)
-
+    # Create tables
     for key, value in sql_tables.items():
         create_table(key, value, conn)
-
+    # Convert waapi data to sql data and insert/update them
     for i, datagroup in enumerate(client.datas):
         for data in datagroup:
             if i == 1 or i == 2:
@@ -40,10 +41,11 @@ def main():
             else:
                 column_diff, id_diff = diff_data(table, sql_values, conn)
                 update_data(table, column_diff, id_diff, conn)
-
+    # Close database
     close_database(conn)
-
+    # Close WAMP connection
     client.disconnect()
+
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,8 @@
+##################################### Waapi Call Arguments #######################################################
 from wd_config import *
 
+
+# Project call args
 def get_project_args():
     return {
         "from": {
@@ -8,6 +11,9 @@ def get_project_args():
             ]
         }
     }
+
+
+# Event call args
 def get_event_args():
     return {
         "from": {
@@ -18,6 +24,7 @@ def get_event_args():
     }
 
 
+# Action call args
 def get_action_args(event_id):
     ret_list = []
     for value in action_config.values():
@@ -35,17 +42,13 @@ def get_action_args(event_id):
     }
 
 
+# Target call args
 def get_target_args(target_id):
     ret_list = []
+    # None list properties
     for value in target_config.values():
         ret_list.append(value)
-
-    # for key, value in target_condition_config.items():
-    #     ret_list.append(key)
-    #     for obj in value:
-    #         for list_key, list_value in obj.items():
-    #             ret_list.append(list_value)
-
+    # List properties
     for value in target_list_config.values():
         ret_list.append(value)
 
@@ -58,6 +61,7 @@ def get_target_args(target_id):
     }
 
 
+# Switch group call args
 def get_switchgroup_args(target_id):
     return {
         "from": {
@@ -71,6 +75,7 @@ def get_switchgroup_args(target_id):
     }
 
 
+# State group call args
 def get_stategroup_args(switchgroup_id):
     return {
         "from": {
@@ -81,19 +86,7 @@ def get_stategroup_args(switchgroup_id):
     }
 
 
-def get_children_args(children_id):
-    return {
-        "from": {
-            "id": [children_id]
-        },
-        "transform": [
-            {"select": ["children"]}
-        ]
-    }, {
-        "return": ["id", "name"]
-    }
-
-
+# Attenuation args
 def get_atten_args(atten_id):
     return {
         "from": {
@@ -104,6 +97,7 @@ def get_atten_args(atten_id):
     }
 
 
+# RTPC call args
 def get_rtpc_args():
     return {
         "from": {
@@ -113,4 +107,18 @@ def get_rtpc_args():
             }
     }, {
         "return": ["id", "name", "@BindToBuiltInParam", "@InitialValue", "@Max", "@Min"]
+    }
+
+
+# Get children objects' id & name args
+def get_children_args(children_id):
+    return {
+        "from": {
+            "id": [children_id]
+        },
+        "transform": [
+            {"select": ["children"]}
+        ]
+    }, {
+        "return": ["id", "name"]
     }

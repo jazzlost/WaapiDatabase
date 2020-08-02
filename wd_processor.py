@@ -1,5 +1,7 @@
+##################################### Save Waapi Catched Datas Into Datas Object #######################################################
 from wd_config import *
 
+# Project data processing
 def process_project(wwise_info, project_info, datas):
     data = {}
     version = wwise_info.get("version").get("displayName")
@@ -10,6 +12,7 @@ def process_project(wwise_info, project_info, datas):
     datas.append(data)
 
 
+# Event data processing
 def process_event(events, datas):
     for event in events.get("return"):
         data = {}
@@ -18,18 +21,21 @@ def process_event(events, datas):
         datas.append(data)
 
 
+# Action data processing
 def process_action(actions, data):
     for action in actions.get("return"):
         for key, value in action_config.items():
             data.setdefault(key, []).append(action.get(value))
 
 
+# Target data processing
 def process_target(targets, datas):
     for target in targets.get("return"):
         data = {}
+        # Dict object data
         for key, value in target_config.items():
             data.setdefault(key, target.get(value))
-        
+        # List object data
         for key, value in target_list_config.items():
             if target.get(value) is not None:
                 data.setdefault(key, []).append(target.get(value))
@@ -37,6 +43,7 @@ def process_target(targets, datas):
         datas.append(data)
 
 
+# Switch group data processing
 def process_switchgroup(switches, data):
     for switch in switches.get("return"):
         for key, value in switchgroup_config.items():
@@ -48,6 +55,7 @@ def process_switchgroup(switches, data):
                 del data["SwitchOrStateGroup"]
 
 
+# State group data processing
 def process_stategroup(switchgroup, statesgroup, data, switch_datas):
     for state in statesgroup.get("return"):
         for key, value in stategroup_config.items():    
@@ -59,6 +67,7 @@ def process_stategroup(switchgroup, statesgroup, data, switch_datas):
                         switch_datas.remove(data)
 
 
+# Switches data processing
 def process_switch(switchgroup, switches, switch_datas):
     data = {"Id": switchgroup["id"], "Name": switchgroup["name"], "SwitchState": []}
     for switch in switches.get("return"):
@@ -67,6 +76,7 @@ def process_switch(switchgroup, switches, switch_datas):
     switch_datas.append(data)
 
 
+# States data processing
 def process_state(stategroup, states, state_datas):
     data = {"Id": stategroup["id"], "Name": stategroup["name"], "State": []}
     for state in states.get("return"):
@@ -75,6 +85,7 @@ def process_state(stategroup, states, state_datas):
     state_datas.append(data)
 
 
+# Attenuation data processing
 def process_atten(attens, atten_datas):
     data = {}
     for atten in attens.get("return"):
@@ -84,6 +95,7 @@ def process_atten(attens, atten_datas):
         atten_datas.append(data)
 
 
+# RTPC data processing
 def process_rtpc(rtpcs, rtpc_datas):
     for rtpc in rtpcs.get("return"):
         data = {}
@@ -92,6 +104,7 @@ def process_rtpc(rtpcs, rtpc_datas):
         rtpc_datas.append(data)
 
 
+# Process no properties' data as None
 def process_none(data, datas_name):
     if len(datas_name) == 0:
         return

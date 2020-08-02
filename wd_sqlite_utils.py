@@ -1,4 +1,7 @@
+################################ SQLite Utilities ############################################
 
+
+# Remove last comma in sql phrase 
 def remove_last_comma(str):
     index = str.find(",", -1)
     list_str = list(str)
