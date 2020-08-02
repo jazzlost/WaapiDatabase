@@ -47,7 +47,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_New" ID="{FFB2E624-3C53-4D4B-AB23-4A9196BB4638}">
+				<Event Name="Play_TwoTarget" ID="{FFB2E624-3C53-4D4B-AB23-4A9196BB4638}">
 					<ChildrenList>
 						<Action Name="" ID="{48332D8D-F73D-42E5-AF53-7517D7B4FF2F}" ShortID="1024256982">
 							<ReferenceList>
@@ -62,6 +62,23 @@
 									<ObjectRef Name="Vehicle" ID="{EE59A588-55BB-4409-BC88-D04EEAB0E276}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
 								</Reference>
 							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Empty" ID="{51F92F16-6D38-4C58-B8E0-2B6170D3311F}"/>
+				<Event Name="Play_TwoAction" ID="{5431387E-E901-490E-9AF3-0BEC337CEBAF}">
+					<ChildrenList>
+						<Action Name="" ID="{AED01695-3039-43FC-BDCA-C34831AB3818}" ShortID="51993663">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="3"/>
+							</PropertyList>
+							<ReferenceList/>
+						</Action>
+						<Action Name="" ID="{9D785AAC-FDFB-428D-B7B2-28B451AD1F92}" ShortID="821198615">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="37"/>
+							</PropertyList>
+							<ReferenceList/>
 						</Action>
 					</ChildrenList>
 				</Event>

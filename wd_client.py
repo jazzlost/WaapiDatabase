@@ -67,14 +67,17 @@ class client(object):
         for data in self.event_datas:
             kwargs, option = get_action_args(data.get("Id"))
             actions = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-            process_action(actions, data)
-            for t in data.get("Target"):
-                target_id.add(t.get("id"))
+            if len(actions["return"]) > 0:
+                process_action(actions, data)
+                for t in data.get("Target"):
+                    target_id.add(t.get("id"))
+            process_none(data, "event_datas")
 
         for id in target_id:
             kwargs, option = get_target_args(id)
             targets = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-            process_target(targets, self.target_datas)
+            if targets is not None:
+                process_target(targets, self.target_datas)
 
         ##############################################################################################
 
@@ -117,7 +120,7 @@ class client(object):
         process_rtpc(rtpcs, self.rtpc_datas)
 
         for data in self.target_datas:
-            process_none(data)
+            process_none(data, "target_datas")
 
 
         print("pause")

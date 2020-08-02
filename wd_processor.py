@@ -91,16 +91,28 @@ def process_rtpc(rtpcs, rtpc_datas):
         rtpc_datas.append(data)
 
 
-def process_none(data):
-    if "Attenuation" not in data:
-        data["Attenuation"] = None
+def process_none(data, datas_name):
+    if len(datas_name) == 0:
+        return
 
-    if "SwitchGroup" not in data:
-        data["SwitchGroup"] = None
-    elif len(data["SwitchGroup"]) == 0:
-        data["SwitchGroup"] = None
+    # Event Datas
+    if datas_name == "event_datas":
+        event_list = list(event_config.keys())
+        event_list += list(action_config.keys())
+        for key in event_list:
+            if key not in data:
+                data[key] = None
+    # Target_datas
+    elif datas_name == "target_datas":
+        if "Attenuation" not in data:
+            data["Attenuation"] = None
 
-    if "StateGroup" not in data:
-        data["StateGroup"] = None
-    elif len(data["StateGroup"]) == 0:
-        data["StateGroup"] = None
+        if "SwitchGroup" not in data:
+            data["SwitchGroup"] = None
+        elif len(data["SwitchGroup"]) == 0:
+            data["SwitchGroup"] = None
+
+        if "StateGroup" not in data:
+            data["StateGroup"] = None
+        elif len(data["StateGroup"]) == 0:
+            data["StateGroup"] = None
