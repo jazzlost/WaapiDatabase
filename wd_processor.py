@@ -4,11 +4,12 @@ from wd_config import *
 # Project data processing
 def process_project(wwise_info, project_info, datas):
     data = {}
-    version = wwise_info.get("version").get("displayName")
-    data["Version"] = version
     for p in project_info.get("return"):
         data["Id"] = p.get("id")
         data["Name"] = p.get("name")
+
+    version = wwise_info.get("version").get("displayName")
+    data["Version"] = version
     datas.append(data)
 
 
