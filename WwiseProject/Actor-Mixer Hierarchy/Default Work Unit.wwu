@@ -6,6 +6,34 @@
 				<RandomSequenceContainer Name="Character" ID="{6D0986ED-0B90-43BB-AC7F-0025C1618AA3}" ShortID="693961166">
 					<PropertyList>
 						<Property Name="3DSpatialization" Type="int16" Value="2"/>
+						<Property Name="EnableAttenuation" Type="bool">
+							<RTPCList>
+								<RTPC Name="" ID="{EA57D97C-2C58-441E-813D-62338D9B00F3}" ShortID="42030560">
+									<ReferenceList>
+										<Reference Name="ControlInput">
+											<ObjectRef Name="Weapon_RTPC" ID="{794CF327-F8E8-4EE8-890E-57630E224FBE}" WorkUnitID="{91932ADB-8C67-4AF0-81B1-850F96DFBD95}"/>
+										</Reference>
+									</ReferenceList>
+									<Curve Name="" ID="{08A1FD75-C67E-4DFA-A7D5-BAB02DFB8866}">
+										<PropertyList>
+											<Property Name="Flags" Type="int32" Value="65537"/>
+										</PropertyList>
+										<PointList>
+											<Point>
+												<XPos>-100</XPos>
+												<YPos>1</YPos>
+												<Flags>5</Flags>
+											</Point>
+											<Point>
+												<XPos>100</XPos>
+												<YPos>1</YPos>
+												<Flags>37</Flags>
+											</Point>
+										</PointList>
+									</Curve>
+								</RTPC>
+							</RTPCList>
+						</Property>
 						<Property Name="Lowpass" Type="int16">
 							<ValueList>
 								<Value>70</Value>

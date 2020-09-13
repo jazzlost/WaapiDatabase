@@ -136,4 +136,4 @@ container_tags = [
     "SwitchContainer"
 ]
 
-wwu_root = "./WwiseProject/Actor-Mixer Hierarchy/"
+wwu_root = "./Actor-Mixer Hierarchy/"

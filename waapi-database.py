@@ -9,7 +9,7 @@ from wd_config import *
 def main():
     # Get path and name argv
     if len(sys.argv) < 2:
-        sql_database_path = "../"
+        sql_database_path = "./"
         sql_database_name = "waapi"
     else:
         sql_database_path = sys.argv[1]
