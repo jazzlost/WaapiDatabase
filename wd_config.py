@@ -113,8 +113,8 @@ sql_rtpc_table = {
     "Name": "VARCHAR",
     "UseBuildInParam": "INT",
     "DefaultValue": "REAL",
-    "MAX": "REAL",
-    "MIN": "REAL"
+    "MaxValue": "REAL",
+    "MinValue": "REAL"
 }
 
 sql_tables = {
