@@ -3,6 +3,7 @@ import time
 from waapi import EventHandler, connect
 from wd_args import *
 from wd_processor import *
+from wd_parser import *
 
 class client(object):
 
@@ -81,6 +82,8 @@ class client(object):
             if targets is not None:
                 process_target(targets, self.target_datas)
 
+        # Waapi do not support to get rtpc ref, we get it from .wwu
+        fill_rtpc_ids(target_id, self.target_datas)
         ##################################### Catch event related switch and state group datas #########################################################
         for data in self.target_datas:
             kwargs, option = get_switchgroup_args(data.get("Id"))

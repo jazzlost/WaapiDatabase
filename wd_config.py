@@ -83,6 +83,7 @@ sql_target_table = {
     "UseListenerRelativeRoute": "INT DEFAULT 0",
     "Spatialization3D": "VARCHAR",
     "AttenId": "VARCHAR",
+    "RtpcId": "VARCHAR",
     "SwitchGroupId": "VARCHAR",
     "StateGroupId": "VARCHAR"
 }
@@ -126,3 +127,13 @@ sql_tables = {
     "Attenuation": sql_atten_table,
     "RTPC": sql_rtpc_table
 }
+
+################################ Parser Config ############################################
+container_tags = [
+    "AudioSource",
+    "BlendContainer",
+    "RandomSequenceContainer",
+    "SwitchContainer"
+]
+
+wwu_root = "./WwiseProject/Actor-Mixer Hierarchy/"

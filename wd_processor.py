@@ -40,7 +40,8 @@ def process_target(targets, datas):
         for key, value in target_list_config.items():
             if target.get(value) is not None:
                 data.setdefault(key, []).append(target.get(value))
-
+        
+        data.setdefault("RtpcId", [])
         datas.append(data)
 
 
@@ -133,3 +134,9 @@ def process_none(data, datas_name):
             data["StateGroup"] = None
         elif len(data["StateGroup"]) == 0:
             data["StateGroup"] = None
+
+        if "RtpcId" not in data:
+            data["RtpcId"] = None
+        elif len(data["RtpcId"]) == 0:
+            data["RtpcId"] = None
+
