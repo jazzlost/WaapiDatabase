@@ -26,6 +26,12 @@ def process_event(events, datas):
 def process_action(actions, data):
     for action in actions.get("return"):
         for key, value in action_config.items():
+            if type(action.get(value)) == dict:
+                if "id" in action.get(value):
+                    if action.get(value)["id"] == invalid_id:
+                        data.setdefault(key, []).append(None)
+                        continue
+            
             data.setdefault(key, []).append(action.get(value))
 
 
@@ -35,6 +41,12 @@ def process_target(targets, datas):
         data = {}
         # Dict object data
         for key, value in target_config.items():
+            if type(target.get(value)) == dict:
+                if "id" in target.get(value):
+                    if target.get(value)["id"] == invalid_id:
+                        data.setdefault(key, None)
+                        continue    
+            
             data.setdefault(key, target.get(value))
         # List object data
         for key, value in target_list_config.items():

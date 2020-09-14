@@ -1,4 +1,5 @@
 ################################ Waapi Config ############################################
+invalid_id = '{00000000-0000-0000-0000-000000000000}'
 
 event_config = {
    "Id": "id",
@@ -136,4 +137,4 @@ container_tags = [
     "SwitchContainer"
 ]
 
-wwu_root = "./Actor-Mixer Hierarchy/"
+wwu_root = "./WwiseProject/Actor-Mixer Hierarchy/"

@@ -72,7 +72,8 @@ class client(object):
             if len(actions["return"]) > 0:
                 process_action(actions, data)
                 for t in data.get("Target"):
-                    target_id.add(t.get("id"))
+                    if t is not None:
+                        target_id.add(t.get("id"))
             process_none(data, "event_datas")
 
         #################################### Catch event related target(containers or audio sources) datas ##########################################################
