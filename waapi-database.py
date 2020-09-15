@@ -10,17 +10,18 @@ def main():
     # Get path and name argv
     if len(sys.argv) < 2:
         sql_database_path = "./"
-        sql_database_name = "waapi"
+        sql_database_name = "Waapi"
     else:
         sql_database_path = sys.argv[1]
         sql_database_name = sys.argv[2]
+
 
     # Make WAMP client
     client = wdc()
     # Make WAMP connection
     client.connect()
     # Catch waapi datas
-    client.catch_datas()
+    client.catch_datas(sql_database_path)
     # Create database
     conn = create_database(sql_database_path, sql_database_name)
     # Create tables

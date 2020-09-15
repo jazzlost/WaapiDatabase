@@ -45,22 +45,23 @@ class WwuParserHandler(xml.sax.ContentHandler):
         pass
 
 
-def fill_rtpc_ids(targetIds, target_datas):
+def fill_rtpc_ids(project_root, targetIds, target_datas):
     # Create XML Parser
     parser = xml.sax.make_parser()
     # Set Parser Handler
     Handler = WwuParserHandler(targetIds, target_datas)
     parser.setContentHandler(Handler)
     # Start To Parse
-    wwus = GetWwuFiles()
+    wwus = GetWwuFiles(project_root)
     for wwu in wwus:
         parser.parse(wwu)
 
 
-def GetWwuFiles():
-    list = os.listdir(wwu_root)
+def GetWwuFiles(project_root):
+    wwu_full_path = project_root + wwu_root
+    list = os.listdir(wwu_full_path)
     wwus = []
     for name in list:
-        file = wwu_root + str(name)
+        file = wwu_full_path + str(name)
         wwus.append(file)
     return wwus

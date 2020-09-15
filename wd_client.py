@@ -50,7 +50,7 @@ class client(object):
 
 
     ################################### Waapi data catcher #########################################################
-    def catch_datas(self):
+    def catch_datas(self, project_root):
 
         ################################### Catch project data  #########################################################
         kwargs = get_project_args()
@@ -84,7 +84,7 @@ class client(object):
                 process_target(targets, self.target_datas)
 
         # Waapi do not support to get rtpc ref, we get it from .wwu
-        fill_rtpc_ids(target_id, self.target_datas)
+        fill_rtpc_ids(project_root, target_id, self.target_datas)
         ##################################### Catch event related switch and state group datas #########################################################
         for data in self.target_datas:
             kwargs, option = get_switchgroup_args(data.get("Id"))
