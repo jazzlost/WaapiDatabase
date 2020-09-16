@@ -53,15 +53,23 @@ def fill_rtpc_ids(project_root, targetIds, target_datas):
     parser.setContentHandler(Handler)
     # Start To Parse
     wwus = GetWwuFiles(project_root)
-    for wwu in wwus:
-        parser.parse(wwu)
+    try:
+        for wwu in wwus:
+            parser.parse(wwu)
+    except TypeError:
+        print("WaapiDatabase:Error:No Valid Wwu File Exist!")
+    
 
 
 def GetWwuFiles(project_root):
     wwu_full_path = project_root + wwu_root
-    list = os.listdir(wwu_full_path)
-    wwus = []
-    for name in list:
-        file = wwu_full_path + str(name)
-        wwus.append(file)
-    return wwus
+    try:
+        list = os.listdir(wwu_full_path)
+    except FileNotFoundError:
+        print("WaapiDatabase:Error:Wwu File Path Is Invalid!")
+    else:
+        wwus = []
+        for name in list:
+            file = wwu_full_path + str(name)
+            wwus.append(file)
+        return wwus

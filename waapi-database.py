@@ -1,5 +1,6 @@
 ##################################### Program Entrance #######################################################
 import sys
+import os
 from wd_client import client as wdc
 from wd_sqlite_interface import *
 from wd_sqlite_utils import *
@@ -9,11 +10,13 @@ from wd_config import *
 def main():
     # Get path and name argv
     if len(sys.argv) < 2:
-        sql_database_path = "./"
+        sql_database_path = os.getcwd()
         sql_database_name = "Waapi"
     else:
         sql_database_path = sys.argv[1]
         sql_database_name = sys.argv[2]
+
+    sql_database_path = sql_database_path.replace('\\', '/')
 
 
     # Make WAMP client
