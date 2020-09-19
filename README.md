@@ -9,3 +9,5 @@
 ## 3. put .wcmdline file under ```YourWwiseInstallPath/Authoring/Data/Factory Command Lines```
 
 ## 4. Double click .exe file will begin to create database or go to Wwise ```soundbank manager``` tab and load .wcmdline as ```post-generation step```. Next time when you generate bank, it will create database automatically
+
+## 5. Edit .json file to add extra catching data
