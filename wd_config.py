@@ -1,4 +1,20 @@
+import json
+
+
 ################################ Waapi Config ############################################
+
+class configurer(object):
+
+    def __init__(self, file):
+        config = {}
+        with open(file) as f:
+            config = json.load(f)
+
+        self.WaapiConfig = config.get("WaapiConfig")
+        self.SqliteConfig = config.get("SqliteConfig")
+        self.ParserConfig = config.get("ParserConfig")
+
+
 invalid_id = '{00000000-0000-0000-0000-000000000000}'
 
 
@@ -138,4 +154,4 @@ container_tags = [
     "SwitchContainer"
 ]
 
-wwu_root = "/Actor-Mixer Hierarchy/"
+wwu_root = "/WwiseProject/Actor-Mixer Hierarchy/"
