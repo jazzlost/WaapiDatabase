@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CmdLine Description="Waapi-database">"$(WwiseProjectPath)\waapi-database.exe" "$(WwiseProjectPath)" "$(WwiseProjectName)"</CmdLine>
+<CmdLine Description="Waapi-database">"$(WwiseProjectPath)\waapi-database.exe" "$(WwiseProjectPath)" "$(WwiseProjectName)" "$(WwiseProjectPath)"</CmdLine>

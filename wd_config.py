@@ -18,7 +18,14 @@ class configurer(object):
         self.ParserConfig = config.get("ParserConfig")
 
 
-config_path = os.getcwd() + "/config.json"
+config_path = ""
+
+if len(sys.argv) < 3:
+    config_path = os.getcwd() + "/waapi_config.json"
+else:
+    config_path = sys.argv[3] + "/waapi_config.json"
+
+# Create global config object
 g_config = configurer(config_path)
 
 ################################ Waapi Config ############################################
