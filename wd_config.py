@@ -1,157 +1,77 @@
 import json
-
-
-################################ Waapi Config ############################################
+import os
+import sys
 
 class configurer(object):
 
     def __init__(self, file):
         config = {}
-        with open(file) as f:
-            config = json.load(f)
+        try:
+            with open(file) as f:
+                config = json.load(f)
+        except FileNotFoundError:
+            print("WaapiDatabase:Error:No Valid config json file Exist!")
+            sys.exit(0)
 
         self.WaapiConfig = config.get("WaapiConfig")
         self.SqliteConfig = config.get("SqliteConfig")
         self.ParserConfig = config.get("ParserConfig")
 
 
-invalid_id = '{00000000-0000-0000-0000-000000000000}'
+config_path = os.getcwd() + "/config.json"
+g_config = configurer(config_path)
+
+################################ Waapi Config ############################################
+
+try:
+    waapi_config = g_config.WaapiConfig
+
+    invalid_id = waapi_config.get("invalid_id")
+
+    event_config = waapi_config.get("event_config")
+
+    action_config = waapi_config.get("action_config")
+
+    # Dict properties for target
+    target_config = waapi_config.get("target_config")
+
+    # List properties for target
+    target_list_config = waapi_config.get("target_list_config")
+
+    switchgroup_config = waapi_config.get("switchgroup_config")
+
+    stategroup_config = waapi_config.get("stategroup_config")
+
+    atten_config = waapi_config.get("atten_config")
+
+    rtpc_config = waapi_config.get("rtpc_config")
+
+    ################################ SQLite Config ############################################
+
+    sql_tables = g_config.SqliteConfig.get("sql_tables")
+
+    sql_project_table = sql_tables.get("sql_project_table")
+
+    sql_event_table = sql_tables.get("sql_event_table")
+
+    sql_target_table = sql_tables.get("sql_target_table")
+
+    sql_switch_table = sql_tables.get("sql_switch_table")
+
+    sql_state_table = sql_tables.get("sql_state_table")
+
+    sql_atten_table = sql_tables.get("sql_atten_table")
+
+    sql_rtpc_table = sql_tables.get("sql_rtpc_table")
 
 
-event_config = {
-   "Id": "id",
-   "Name": "name"
-}
+    ################################ Parser Config ############################################
 
-action_config = {
-    "ActionId": "id",
-    "ActionType": "@ActionType",
-    "Target": "@Target"
-}
+    parser_config = g_config.ParserConfig
 
-# Dict properties for target
-target_config = {
-    "Id": "id",
-    "Name": "name",
-    "Volume": "@Volume",
-    "Pitch": "@Pitch",
-    "LPF": "@Lowpass",
-    "HPF": "@Highpass",
-    "UseMaxSoundInstance": "@@UseMaxSoundPerInstance",
-    "MaxSound": "@@UseMaxSoundPerInstance",
-    "UseListenerRelativeRoute": "@@ListenerRelativeRouting",
-    "Spatialization3D": "@@3DSpatialization",
-    "Attenuation": "@@Attenuation"
-}
+    container_tags = parser_config.get("container_tags")
 
-# List properties for target
-target_list_config = {
-    "SwitchOrStateGroup": "@SwitchGroupOrStateGroup"
-}
+    wwu_root = parser_config.get("wwu_root")
 
-switchgroup_config = {
-    "SwitchGroup": "@SwitchGroupOrStateGroup"
-}
-
-stategroup_config = {
-    "StateGroup": "StateGroup"
-}
-
-atten_config = {
-    "Id": "id",
-    "Name": "name",
-    "MaxDistance": "@@RadiusMax",
-    "UseCone": "@@ConeUse"
-}
-
-rtpc_config = {
-    "Id": "id",
-    "Name": "name",
-    "UseBuildInParam": "@BindToBuiltInParam",
-    "DefaultValue": "@InitialValue",
-    "Max": "@Max",
-    "Min": "@Min"
-}
-
-################################ SQLite Config ############################################
-
-sql_project_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "Version": "VARCHAR"
-}
-
-sql_event_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "ActionId": "VARCHAR",
-    "ActionType": "INT",
-    "TargetId": "VARCHAR"
-}
-
-sql_target_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "Volume": "REAL DEFAULT 0.0",
-    "Pitch": "INT DEFAULT 0",
-    "LPF": "INT DEFAULT 0",
-    "HPF": "INT DEFAULT 0",
-    "UseMaxSoundInstance": "INT DEFAULT 0",
-    "MaxSound": "INT DEFAULT 50",
-    "UseListenerRelativeRoute": "INT DEFAULT 0",
-    "Spatialization3D": "VARCHAR",
-    "AttenId": "VARCHAR",
-    "RtpcId": "VARCHAR",
-    "SwitchGroupId": "VARCHAR",
-    "StateGroupId": "VARCHAR"
-}
-
-sql_switch_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "SwitchId": "VARCHAR",
-    "SwitchName": "VARCHAR"
-}
-
-sql_state_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "StateId": "VARCHAR",
-    "StateName": "VARCHAR"
-}
-
-sql_atten_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "MaxDistance": "INT",
-    "UseCone": "INT"
-}
-
-sql_rtpc_table = {
-    "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
-    "Name": "VARCHAR",
-    "UseBuildInParam": "INT",
-    "DefaultValue": "REAL",
-    "MaxValue": "REAL",
-    "MinValue": "REAL"
-}
-
-sql_tables = {
-    "Project": sql_project_table,
-    "Event": sql_event_table,
-    "Target": sql_target_table,
-    "Switch": sql_switch_table,
-    "State": sql_state_table,
-    "Attenuation": sql_atten_table,
-    "RTPC": sql_rtpc_table
-}
-
-################################ Parser Config ############################################
-container_tags = [
-    "AudioSource",
-    "BlendContainer",
-    "RandomSequenceContainer",
-    "SwitchContainer"
-]
-
-wwu_root = "/WwiseProject/Actor-Mixer Hierarchy/"
+except AttributeError:
+    print("WaapiDatabase:Error:Config file load failed!")

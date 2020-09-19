@@ -18,10 +18,6 @@ def main():
 
     sql_database_path = sql_database_path.replace('\\', '/')
 
-    config_path= sql_database_path + "/config.json"
-
-    my_config = configurer(config_path)
-
     # Make WAMP client
     client = wdc()
     # Make WAMP connection

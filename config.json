@@ -4,6 +4,11 @@
         "invalid_id": "{00000000-0000-0000-0000-000000000000}",
     
         "event_config": {
+            "Id": "id",
+            "Name": "name"
+         },
+
+        "action_config": {
             "ActionId": "id",
             "ActionType": "@ActionType",
             "Target": "@Target"
@@ -55,13 +60,13 @@
     "SqliteConfig": {
         
         "sql_tables": {
-            "sql_project_table": {
+            "Project": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "Version": "VARCHAR"
             },
             
-            "sql_event_table": {
+            "Event": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "ActionId": "VARCHAR",
@@ -69,7 +74,7 @@
                 "TargetId": "VARCHAR"
             },
             
-            "sql_target_table": {
+            "Target": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "Volume": "REAL DEFAULT 0.0",
@@ -86,28 +91,28 @@
                 "StateGroupId": "VARCHAR"
             },
             
-            "sql_switch_table": {
+            "Switch": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "SwitchId": "VARCHAR",
                 "SwitchName": "VARCHAR"
             },
             
-            "sql_state_table": {
+            "State": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "StateId": "VARCHAR",
                 "StateName": "VARCHAR"
             },
             
-            "sql_atten_table": {
+            "Attenuation": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "MaxDistance": "INT",
                 "UseCone": "INT"
             },
             
-            "sql_rtpc_table": {
+            "RTPC": {
                 "Id": "VARCHAR PRIMARY KEY NOT NULL UNIQUE",
                 "Name": "VARCHAR",
                 "UseBuildInParam": "INT",

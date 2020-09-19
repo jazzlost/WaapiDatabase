@@ -1,8 +1,10 @@
 ################################ SQLite Interface ############################################
 import sqlite3
+from sqlite3.dbapi2 import OperationalError
 import time
 import datetime
 import random
+import sys
 
 from wd_config import sql_tables
 from wd_sqlite_utils import *
@@ -11,8 +13,13 @@ from wd_sqlite_utils import *
 # Create database with path and name
 def create_database(path, name):
     fullname = path + "/" + name + ".db"
-    conn = sqlite3.connect(fullname)
-    return conn
+    try:
+        conn = sqlite3.connect(fullname)
+    except OperationalError:
+        print("WaapiDatabase:Error:Can not create or open database!")
+        sys.exit(0)
+    else:
+        return conn
 
 
 # Close database
