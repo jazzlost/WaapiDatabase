@@ -82,6 +82,39 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_Animal_Rename" ID="{CE09FEAB-8BCE-4844-9600-9AA7F4533284}">
+					<ChildrenList>
+						<Action Name="" ID="{DC1E2209-5B7C-4123-ABC8-50392B8872E4}" ShortID="770098008">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Animal_Rename" ID="{CA536DB0-28CE-4257-8D7A-DDBB9D8BD98E}" WorkUnitID="{9CC9CF80-7325-4477-98FE-A817E5F6B843}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Nest_Character" ID="{C1F11C0D-942C-4C2D-B6C0-FCA172FF8F7F}">
+					<ChildrenList>
+						<Action Name="" ID="{6CBA334A-8D36-48E7-AAD7-0544B2A1C0B7}" ShortID="419407657">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Nest_Character" ID="{719CB2F6-43E9-4931-92B2-2F43D00681CF}" WorkUnitID="{A842D6E4-505B-4410-BE40-8E1CB7C2C0AE}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Nest_Vehicle" ID="{F3200E42-4289-4F99-82D2-C658A75A01A6}">
+					<ChildrenList>
+						<Action Name="" ID="{0B80CCEC-067D-40CC-8CC4-FEC707B337AF}" ShortID="561977292">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Nest_Vehicle" ID="{E1C88855-76A4-4067-A61E-A6404631C858}" WorkUnitID="{A842D6E4-505B-4410-BE40-8E1CB7C2C0AE}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

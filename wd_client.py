@@ -91,20 +91,20 @@ class client(object):
             switchgroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
             if switchgroups is not None:
                 process_switchgroup(switchgroups, data)
-
             ##################################### Catch switch group related switch state datas #########################################################
             if "SwitchGroup" in data:
                 for switchgroup in data.get("SwitchGroup"):
-                    kwargs, option = get_children_args(switchgroup.get("id"))
-                    switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-                    if switches is not None:
-                        process_switch(switchgroup, switches, self.switch_datas)
+                    if switchgroup is not None:
+                        kwargs, option = get_children_args(switchgroup.get("id"))
+                        switches = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                        if switches is not None:
+                            process_switch(switchgroup, switches, self.switch_datas)
             
                     ##################################### Get state gourp from switch group datas #########################################################
-                    kwargs, option = get_stategroup_args(switchgroup.get("id"))
-                    stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
-                    if stategroups is not None:
-                        process_stategroup(switchgroup, stategroups, data, self.switch_datas)
+                        kwargs, option = get_stategroup_args(switchgroup.get("id"))
+                        stategroups = self.client.call("ak.wwise.core.object.get", **kwargs, options=option)
+                        if stategroups is not None:
+                            process_stategroup(switchgroup, stategroups, data, self.switch_datas)
 
             ##################################### Catch state group related state datas #########################################################
             if "StateGroup" in data:

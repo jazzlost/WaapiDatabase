@@ -85,7 +85,7 @@
 						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>-5</Value>
+								<Value>-25</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -387,7 +387,7 @@
 						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>20</Value>
+								<Value>10</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -470,6 +470,39 @@
 						</SwitchContainer>
 					</ChildrenList>
 				</BlendContainer>
+				<RandomSequenceContainer Name="Animal_Rename" ID="{CA536DB0-28CE-4257-8D7A-DDBB9D8BD98E}" ShortID="472935365">
+					<PropertyList>
+						<Property Name="Highpass" Type="int16">
+							<ValueList>
+								<Value>11</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Lowpass" Type="int16">
+							<ValueList>
+								<Value>6</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>-280</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-10</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{F1A5B864-44F3-48EC-8B80-060E38B32D29}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{59CBE7EC-1727-4388-93A5-0EFA032D96EB}"/>
+						</Reference>
+					</ReferenceList>
+				</RandomSequenceContainer>
+				<WorkUnit Name="Nest Work Unit" ID="{A842D6E4-505B-4410-BE40-8E1CB7C2C0AE}" PersistMode="Reference"/>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

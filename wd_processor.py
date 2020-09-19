@@ -65,8 +65,11 @@ def process_switchgroup(switches, data):
                 data.setdefault(key, []).append(switch.get(value))
             if "SwitchOrStateGroup" in data:
                 for value in data["SwitchOrStateGroup"]:
-                    data.setdefault(key, []).append(value)
-                del data["SwitchOrStateGroup"]
+                    if value["id"] == invalid_id:
+                        data.setdefault(key, []).append(None)
+                    else:
+                        data.setdefault(key, []).append(value)
+                    del data["SwitchOrStateGroup"]
 
 
 # State group data processing

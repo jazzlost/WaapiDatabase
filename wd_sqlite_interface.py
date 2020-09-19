@@ -92,9 +92,22 @@ def is_new_id(table_name, data, conn):
     else:
         return True
 
+# Get all ids from table, return as a set
+def query_all_id(table_name, conn):
+    query_sql = "SELECT Id FROM " + str(table_name)
+    query_datas = query_data(query_sql, conn)
+
+    return_datas = set()
+    for id in query_datas:
+        return_datas.add(id[0])
+    
+    return return_datas
+
 
 # Diff waapi data with sql data and mark all modified columns
 def diff_data(table_name, data, conn):
+
+    # Mark all modified object
     query_sql = "SELECT * FROM " + str(table_name) + " " + "WHERE Id = " + "'" + data[0] + "'"
     query_datas = query_data(query_sql, conn)
 
@@ -127,6 +140,14 @@ def update_data(table_name, column_sql, id, conn):
 
 
 # Delete data
-def delete_data(table_name, Id, conn):
-    sql = "DELETE FROM " + str(table_name) + " " + "WHERE Id = " + "'" + Id + "'"
-    safe_execute(sql, conn)
+def delete_data(table_name, data_ids, conn):
+    # Query all ids of this table from Dababase
+    database_ids = query_all_id(table_name, conn)
+    # Find all deleted_ids by comparing two ids sets
+    deleted_ids = [database_ids.difference(data_ids)]
+
+    # Delete object from Database
+    for id in deleted_ids[0]:
+        if len(id) > 0:
+            sql = "DELETE FROM " + str(table_name) + " " + "WHERE Id = " + "'" + id + "'"
+            safe_execute(sql, conn)
